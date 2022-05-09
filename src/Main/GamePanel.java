@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements ChangeListener{
     @Override
     public void stateChanged(ChangeEvent e) {
         //a = dataModel.getData();
-        //repaint();
+        repaint();
         System.out.println("stateChanged");
         
     }
