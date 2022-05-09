@@ -5,6 +5,8 @@ import javax.swing.event.ChangeEvent;
 
 import Controller.KeyHandler;
 import Models.DataModel;
+import Models.TileModel;
+import Views.TileView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +20,7 @@ public class GamePanel extends JPanel implements ChangeListener{
 
     KeyHandler keyHandler;
     DataModel dataModel;
+    TileView tileView = new TileView(this);
 
 
     public GamePanel(DataModel dataModel) {
@@ -30,6 +33,19 @@ public class GamePanel extends JPanel implements ChangeListener{
         this.addKeyListener(new KeyHandler(dataModel));
         this.setFocusable(true);
 
+    }
+    public void paintComponent(Graphics graphics){
+        super.paintComponent(graphics);
+        Graphics2D graphics2D = (Graphics2D)graphics;
+        // if(interreaction.checkIfWon()){
+        //     gameOver.draw(graphics2D);
+        // }
+        // else {
+             tileView.draw(graphics2D);
+        //     player.draw(graphics2D);
+        //     interreaction.draw(graphics2D);
+        //     graphics2D.dispose();
+        // }
     }
 
     @Override

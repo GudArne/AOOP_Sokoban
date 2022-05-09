@@ -19,7 +19,7 @@ public class TileModel {
         tiles = new ArrayList<>();
 
         readTile();
-        readMap("Resources/Map/map1.txt");
+        readMap("src/Resources/Map/map1.txt");
     }
     public GamePanel getGamePanel(){
         return this.gamePanel;
