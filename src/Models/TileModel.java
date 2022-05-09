@@ -19,9 +19,11 @@ public class TileModel {
         tiles = new ArrayList<>();
 
         readTile();
-        readMap("Pictures/Maps/map1.txt");
+        readMap("Resources/Map/map1.txt");
     }
-
+    public GamePanel getGamePanel(){
+        return this.gamePanel;
+    }
     public void readMap(String map) {
 
         int index = 0;
@@ -58,30 +60,7 @@ public class TileModel {
             e.printStackTrace();
         }
     }
-    public void draw(Graphics2D graphics2D) { //View
-        int secondArray = 0;
-        int firstArray = 0;
 
-        int yPos = 0;
-        int xPos = 0;
-
-        while(firstArray < numTiles.size())
-        {
-            graphics2D.drawImage(tiles.get(numTiles.get(firstArray).get(secondArray)).tileImage,xPos,yPos,gamePanel.tileSize,gamePanel.tileSize,null);
-            xPos += gamePanel.tileSize;
-            secondArray++;
-
-            if(secondArray == numTiles.get(firstArray).size())
-            {
-                secondArray = 0;
-                xPos = 0;
-
-                firstArray++;
-                yPos += gamePanel.tileSize;
-
-            }
-        }
-    }
     public int getTile(int x, int y)
     {
         x = x/gamePanel.tileSize;
