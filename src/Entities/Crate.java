@@ -3,13 +3,13 @@ package Entities;
 import java.awt.image.BufferedImage;
 
 public class Crate {
-    int xPos;
-    int yPos;
+    public int xPos;
+    public int yPos;
 
     public boolean marked = false;
-    BufferedImage image;
+    public BufferedImage image;
 
-    Crate(int xPos, int yPos, BufferedImage image, boolean marked){
+    public Crate(int xPos, int yPos, BufferedImage image, boolean marked){
         this.xPos = xPos;
         this.yPos = yPos;
         this.image = image;
