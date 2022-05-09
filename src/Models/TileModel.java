@@ -52,9 +52,9 @@ public class TileModel {
     public void readTile() {
         try {
 
-            tiles.add(new Tile(ImageIO.read(new File("Pictures/Tiles/blank.png")), false,false));
-            tiles.add(new Tile(ImageIO.read(new File("Pictures/Tiles/blankmarked.png")), false,true));
-            tiles.add(new Tile(ImageIO.read(new File("Pictures/Tiles/wall.png")), true,false));
+            tiles.add(new Tile(ImageIO.read(new File("src/Resources/Tiles/blank.png")), false,false));
+            tiles.add(new Tile(ImageIO.read(new File("src/Resources/Tiles/blankmarked.png")), false,true));
+            tiles.add(new Tile(ImageIO.read(new File("src/Resources/Tiles/wall.png")), true,false));
 
         } catch (Exception e) {
             e.printStackTrace();
