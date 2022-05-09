@@ -7,13 +7,16 @@ import javax.swing.event.ChangeListener;
 
 public class DataModel {
 
+    String direction;
+    ArrayList<ChangeListener> listeners;
+
        /**
       Constructs a DataModel object
       @param d the data to model
    */
-   public DataModel(ArrayList<Double> d)
+   public DataModel(String direction)
    {
-      data = d;
+      this.direction = direction;
       listeners = new ArrayList<ChangeListener>();
    }
 
@@ -21,9 +24,9 @@ public class DataModel {
       Constructs a DataModel object
       @return the data in an ArrayList
    */
-   public ArrayList<Double> getData()
+   public String getData()
    {
-      return (ArrayList<Double>) (data.clone());
+      return direction;
    }
 
    /**
@@ -40,16 +43,17 @@ public class DataModel {
       @param location the index of the field to change
       @param value the new value
    */
-   public void update(int location, double value)
+   public void update(String value)
    {
-      data.set(location, value);
+       ChangeEvent e = new ChangeEvent(this);
+       System.out.println(e.toString() + " " + value);
+      direction = value;
       for (ChangeListener l : listeners)
       {
          l.stateChanged(new ChangeEvent(this));
       }
    }
 
-   ArrayList<Double> data;
-   ArrayList<ChangeListener> listeners;
+
     
 }

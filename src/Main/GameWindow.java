@@ -1,8 +1,14 @@
 package Main;
 
+import java.util.ArrayList;
+
 import javax.swing.*;
 
+import Controller.KeyHandler;
+import Models.DataModel;
+
 public class GameWindow {
+    
     
 
     public GameWindow(JFrame window, GamePanel gamePanel){
@@ -21,6 +27,12 @@ public class GameWindow {
 
     public static void main(String[] args) {
         System.out.println("test");
-        GameWindow gameWindow = new GameWindow(new JFrame(), new GamePanel());
+        String data = "";
+        DataModel model = new DataModel(data);
+
+        GamePanel gamePanel = new GamePanel(model);
+        model.attach(gamePanel);
+        
+        GameWindow gameWindow = new GameWindow(new JFrame(), gamePanel);
     }
 }
