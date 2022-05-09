@@ -16,7 +16,7 @@ public class GameWindow {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        
+
     }
 
     public static void main(String[] args) {
