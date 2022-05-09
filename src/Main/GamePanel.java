@@ -6,6 +6,7 @@ import javax.swing.event.ChangeEvent;
 import Controller.KeyHandler;
 import Models.DataModel;
 import Models.TileModel;
+import Views.CrateView;
 import Views.TileView;
 
 import javax.swing.*;
@@ -21,6 +22,8 @@ public class GamePanel extends JPanel implements ChangeListener{
     KeyHandler keyHandler;
     DataModel dataModel;
     TileView tileView = new TileView(this);
+    TileModel tileModel = new TileModel(this);
+    CrateView crateView = new CrateView(this,tileModel);
 
 
     public GamePanel(DataModel dataModel) {
@@ -44,7 +47,7 @@ public class GamePanel extends JPanel implements ChangeListener{
             System.out.println("repaint invoked");
              tileView.draw(graphics2D);
         //     player.draw(graphics2D);
-        //     interreaction.draw(graphics2D);
+        crateView.draw(graphics2D);
         //     graphics2D.dispose();
         // }
     }
