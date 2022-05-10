@@ -4,6 +4,7 @@ import javax.swing.event.ChangeEvent;
 
 
 import Controller.KeyHandler;
+import Models.CrateModel;
 import Models.DataModel;
 import Models.PlayerModel;
 import Models.TileModel;
@@ -25,7 +26,9 @@ public class GamePanel extends JPanel implements ChangeListener{
     DataModel dataModel;
     TileView tileView = new TileView(this);
     TileModel tileModel = new TileModel(this);
-    CrateView crateView = new CrateView(this,tileModel);
+
+    CrateModel crateModel = new CrateModel(this,tileModel);
+    CrateView crateView = new CrateView(this,crateModel );
     PlayerModel playerModel;
     PlayerView playerView;
 

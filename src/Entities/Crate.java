@@ -15,4 +15,16 @@ public class Crate {
         this.image = image;
         this.marked = marked;
     }
+
+    public void setxPos(int xPos) {
+        this.xPos = xPos;
+    }
+
+    public void setyPos(int yPos) {
+        this.yPos = yPos;
+    }
+
+    public void setMarked(boolean marked) {
+        this.marked = marked;
+    }
 }

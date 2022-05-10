@@ -92,7 +92,7 @@ public class CrateModel {
     public void moveCrate(Crate crate, String direction){
         switch (direction){
             case "up" -> {
-                crate.yPos -= gamePanel.tileSize;
+                crate.setyPos(crate.yPos - gamePanel.tileSize);
             }
             case "down" -> {
                 crate.yPos += gamePanel.tileSize;
@@ -101,8 +101,11 @@ public class CrateModel {
                 crate.xPos -= gamePanel.tileSize;
             }
             case "right" -> {
-                crate.xPos += gamePanel.tileSize;
+                crate.setxPos(crate.xPos + gamePanel.tileSize);
             }
         }
+    }
+    public ArrayList<Crate> getObjectArrayList() {
+        return objectArrayList;
     }
 }
