@@ -50,7 +50,7 @@ public class PlayerModel {
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(player.playerX+gamePanel.tileSize,checkNext(direction));
+                //crateModel.swapImage(player.playerX,checkNext(direction));
                 player.playerY -= gamePanel.tileSize;
             }
 
@@ -66,7 +66,7 @@ public class PlayerModel {
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(player.playerX,checkNext(direction));
+                //crateModel.swapImage(player.playerX,checkNext(direction));
                 player.playerY += gamePanel.tileSize;
             }
 
@@ -81,7 +81,7 @@ public class PlayerModel {
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(crate.xPos, crate.yPos);
+                //crateModel.swapImage(crate.xPos, crate.yPos);
                 player.playerX -= gamePanel.tileSize;
             }
             System.out.println("player: left");
@@ -95,7 +95,7 @@ public class PlayerModel {
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(crate.xPos, crate.yPos);
+                //crateModel.swapImage(crate.xPos+ gamePanel.tileSize, crate.yPos);
                 player.playerX += gamePanel.tileSize;
             }
         }
