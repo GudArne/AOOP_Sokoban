@@ -7,20 +7,22 @@ import Models.DataModel;
 
 import javax.imageio.ImageIO;
 import java.io.File;
-
+import Models.TileModel;
 public class PlayerModel extends Player {
-    KeyHandler keyHandler;
     GamePanel gamePanel;
     DataModel dataModel;
+    TileModel tileModel;
 
-    public PlayerModel(GamePanel gamePanel, DataModel dataModel) {
+    public PlayerModel(GamePanel gamePanel, DataModel dataModel, TileModel tileModel) {
         this.gamePanel = gamePanel;
         this.dataModel = dataModel;
+        this.tileModel = tileModel;
 
         worldX = 0;
         worldY = 0;
 
         setStart();
+        setImage();
     }
      public void setStart(){
          worldY = 2* gamePanel.tileSize;
@@ -29,29 +31,51 @@ public class PlayerModel extends Player {
 
     public void setImage(){
         try {
-            playerImage = ImageIO.read(new File("Insert picture")); //TODO insert picture
+            playerImage = ImageIO.read(new File("src/Resources/Player/player.png")); //TODO insert picture
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     public void update(){
-        if(dataModel.getData() == "up")
+        String direction = dataModel.getData();
+        if(direction == "up" && checkCollision(direction))
         {
             System.out.println("update: up");
         }
-        if(dataModel.getData() == "down")
+        else if(direction == "down" && checkCollision(direction))
         {
             System.out.println("update: down");
         }
-        if(dataModel.getData() == "left")
+        else if(direction == "left" && checkCollision(direction))
         {
             System.out.println("update: left");
         }
-        if(dataModel.getData() == "right")
+        else if(direction == "right" && checkCollision(direction))
         {
             System.out.println("update: right");
         }
 
+    }
+    public boolean checkCollision(String direction){
+        switch (direction){
+            case "up" ->{
+                if(!tileModel.tiles.get(tileModel.getTile(worldX, worldY - gamePanel.tileSize)).collision)
+                    return true;
+            }
+            case "down" ->{
+                if(!tileModel.tiles.get(tileModel.getTile(worldX, worldY + gamePanel.tileSize)).collision)
+                    return true;
+            }
+            case "left" ->{
+                if(!tileModel.tiles.get(tileModel.getTile(worldX - gamePanel.tileSize, worldY)).collision)
+                    return true;
+            }
+            case "right" ->{
+                if(!tileModel.tiles.get(tileModel.getTile(worldX + gamePanel.tileSize, worldY)).collision)
+                    return true;
+            }
+        }
+        return false;
     }
 
     public int getX(){

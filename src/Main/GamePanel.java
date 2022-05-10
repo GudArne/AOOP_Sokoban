@@ -8,6 +8,7 @@ import Models.DataModel;
 import Models.PlayerModel;
 import Models.TileModel;
 import Views.CrateView;
+import Views.PlayerView;
 import Views.TileView;
 
 import javax.swing.*;
@@ -27,11 +28,13 @@ public class GamePanel extends JPanel implements ChangeListener{
     CrateView crateView = new CrateView(this,tileModel);
     PlayerModel playerModel;
 
+    PlayerView playerView = new PlayerView(this,dataModel,tileModel);
+
 
     public GamePanel(DataModel dataModel) {
 
         this.dataModel = dataModel;
-        this.playerModel = new PlayerModel(this, dataModel);
+        this.playerModel = new PlayerModel(this, dataModel,tileModel);
         this.add(new JLabel("test"));
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.WHITE);
@@ -52,7 +55,7 @@ public class GamePanel extends JPanel implements ChangeListener{
         // else {
             System.out.println("repaint invoked");
              tileView.draw(graphics2D);
-        //     player.draw(graphics2D);
+             playerView.draw(graphics2D);
             crateView.draw(graphics2D);
         //     graphics2D.dispose();
         // }
