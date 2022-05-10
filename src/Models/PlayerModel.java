@@ -31,7 +31,7 @@ public class PlayerModel extends Player {
 
     public void setImage(){
         try {
-            playerImage = ImageIO.read(new File("src/Resources/Player/player.png")); //TODO insert picture
+            playerImage = ImageIO.read(new File("src/Resources/Player/player.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,19 +40,19 @@ public class PlayerModel extends Player {
         String direction = dataModel.getData();
         if(direction == "up" && checkCollision(direction))
         {
-            System.out.println("update: up");
+            System.out.println("player: up");
         }
         else if(direction == "down" && checkCollision(direction))
         {
-            System.out.println("update: down");
+            System.out.println("player: down");
         }
         else if(direction == "left" && checkCollision(direction))
         {
-            System.out.println("update: left");
+            System.out.println("player: left");
         }
         else if(direction == "right" && checkCollision(direction))
         {
-            System.out.println("update: right");
+            System.out.println("player: right");
         }
 
     }
