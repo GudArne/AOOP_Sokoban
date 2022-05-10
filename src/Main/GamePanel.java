@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements ChangeListener{
             System.out.println("repaint invoked");
              tileView.draw(graphics2D);
         //     player.draw(graphics2D);
-        crateView.draw(graphics2D);
+            crateView.draw(graphics2D);
         //     graphics2D.dispose();
         // }
     }

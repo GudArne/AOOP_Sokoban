@@ -45,13 +45,11 @@ public class DataModel {
    */
    public void update(String value)
    {
-       ChangeEvent e = new ChangeEvent(this);
-       System.out.println(e.toString() + " " + value);
-      direction = value;
-      for (ChangeListener l : listeners)
-      {
-         l.stateChanged(new ChangeEvent(this));
-      }
+        ChangeEvent e = new ChangeEvent(this);
+        direction = value;
+        for (ChangeListener l : listeners){
+            l.stateChanged(new ChangeEvent(this));
+        }
    }
 
 
