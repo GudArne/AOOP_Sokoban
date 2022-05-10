@@ -104,10 +104,10 @@ public class PlayerModel {
     }
 
     public int getX(){
-        return player.playerX;
+        return player.getPlayerX();
     }
     public int getY(){
-        return player.playerY;
+        return player.getPlayerY();
     }
 
     public int checkNext(String direction){
