@@ -50,7 +50,7 @@ public class PlayerModel {
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(player.playerX,checkNext(direction));
+                crateModel.swapImage(player.playerX+gamePanel.tileSize,checkNext(direction));
                 player.playerY -= gamePanel.tileSize;
             }
 
