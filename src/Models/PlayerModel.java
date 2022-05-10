@@ -77,6 +77,7 @@ public class PlayerModel extends Player {
                 worldX += gamePanel.tileSize;
             }
         }
+        System.out.println(worldX +  " \n" + worldY);
 
     }
     public boolean checkCollision(String direction){

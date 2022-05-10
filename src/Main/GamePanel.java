@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements ChangeListener{
             tileView.draw(graphics2D);
             playerView.draw(graphics2D);
             crateView.draw(graphics2D);
-        //     graphics2D.dispose();
+           graphics2D.dispose();
         // }
     }
 
