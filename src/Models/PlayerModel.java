@@ -1,7 +1,7 @@
 package Models;
 
-import Controller.KeyHandler;
 import Entities.Player;
+import Controller.KeyHandler;
 import Main.GamePanel;
 
 import javax.imageio.ImageIO;
