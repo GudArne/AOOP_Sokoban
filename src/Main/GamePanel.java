@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements ChangeListener{
     TileView tileView = new TileView(this);
     TileModel tileModel = new TileModel(this);
 
-    CrateModel crateModel = new CrateModel(this,tileModel);
-    CrateView crateView = new CrateView(this,crateModel );
+    CrateModel crateModel;
+    CrateView crateView;
     PlayerModel playerModel;
     PlayerView playerView;
 
@@ -36,8 +36,10 @@ public class GamePanel extends JPanel implements ChangeListener{
     public GamePanel(DataModel dataModel) {
 
         this.dataModel = dataModel;
-        this.playerModel = new PlayerModel(this, dataModel,tileModel);
+        this.crateModel = new CrateModel(this,tileModel);
+        this.playerModel = new PlayerModel(this, dataModel,tileModel, crateModel);
         this.playerView = new PlayerView(this,dataModel,tileModel,playerModel);
+        this.crateView =  new CrateView(this,crateModel);
         this.add(new JLabel("test"));
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.WHITE);
@@ -61,7 +63,7 @@ public class GamePanel extends JPanel implements ChangeListener{
             crateView.draw(graphics2D);
             playerView.draw(graphics2D);
 
-           graphics2D.dispose();
+            graphics2D.dispose();
         // }
     }
 

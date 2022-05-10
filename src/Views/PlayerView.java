@@ -14,7 +14,6 @@ public class PlayerView {
   DataModel dataModel;
   PlayerModel playerModel;
     public PlayerView(GamePanel gamePanel, DataModel dataModel,TileModel tileModel, PlayerModel playerModel){
-        //TODO why is this null?
         this.gamePanel = gamePanel;
         this.dataModel = dataModel;
         this.playerModel = playerModel;

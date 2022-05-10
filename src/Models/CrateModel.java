@@ -14,7 +14,7 @@ public class CrateModel {
     public TileModel tileModel;
     //TODO get funktioner
 
-    public CrateModel(GamePanel gamePanel,  TileModel tileModel){
+    public CrateModel(GamePanel gamePanel, TileModel tileModel){
         this.gamePanel = gamePanel;
         objectArrayList = new ArrayList<>();
         this.tileModel = tileModel;
