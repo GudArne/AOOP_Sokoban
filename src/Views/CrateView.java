@@ -2,6 +2,7 @@ package Views;
 
 import Main.GamePanel;
 import Models.CrateModel;
+import Models.DataModel;
 import Models.TileModel;
 
 import java.awt.*;
@@ -9,9 +10,11 @@ import java.awt.*;
 public class CrateView{
     CrateModel crateModel;
     GamePanel gamePanel;
-    public CrateView(GamePanel gamePanel, CrateModel crateModel) {
+    DataModel dataModel;
+    public CrateView(GamePanel gamePanel, CrateModel crateModel, DataModel dataModel) {
         this.crateModel = crateModel;
         this.gamePanel = gamePanel;
+        this.dataModel = dataModel;
     }
 
     public void draw(Graphics2D graphics2D) { //view

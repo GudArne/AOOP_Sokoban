@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements ChangeListener{
     TileModel tileModel = new TileModel(this);
 
     CrateModel crateModel = new CrateModel(this,tileModel);
-    CrateView crateView = new CrateView(this,crateModel );
+    CrateView crateView = new CrateView(this,crateModel,dataModel );
     PlayerModel playerModel;
     PlayerView playerView;
 
