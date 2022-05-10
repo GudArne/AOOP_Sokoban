@@ -59,10 +59,31 @@ public class PlayerModel {
         }
         else if(Objects.equals(direction, "down") && checkCollision(direction))
         {
+            Crate crate = crateModel.getCrate(player.playerX, checkNext(direction));
+            if(crate == null){
+                player.playerY +=gamePanel.tileSize;
+                System.out.println("player: up");
+            }
+            else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
+                crateModel.moveCrate(crate,direction);
+                crateModel.swapImage(player.playerX,checkNext(direction));
+                player.playerY += gamePanel.tileSize;
+            }
+
             System.out.println("player: down");
         }
         else if(Objects.equals(direction, "left") && checkCollision(direction))
         {
+            Crate crate = crateModel.getCrate(checkNext(direction), player.playerY);
+            if(crate == null){
+                player.playerX -=gamePanel.tileSize; //move player
+                System.out.println("player: right");
+            }
+            else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
+                crateModel.moveCrate(crate,direction);
+                crateModel.swapImage(crate.xPos, crate.yPos);
+                player.playerX -= gamePanel.tileSize;
+            }
             System.out.println("player: left");
         }
         else if(Objects.equals(direction, "right") && checkCollision(direction))
