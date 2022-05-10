@@ -21,11 +21,11 @@ public class PlayerModel {
     BufferedImage playerImage;
 
     Player player;
-    public PlayerModel(GamePanel gamePanel, DataModel dataModel, TileModel tileModel) {
+    public PlayerModel(GamePanel gamePanel, DataModel dataModel, TileModel tileModel, CrateModel crateModel) {
         this.gamePanel = gamePanel;
         this.dataModel = dataModel;
         this.tileModel = tileModel;
-        crateModel = new CrateModel(gamePanel,tileModel);
+        this.crateModel = crateModel;
 
         setImage();
         player = new Player(gamePanel.tileSize, 2 * gamePanel.tileSize, playerImage);
