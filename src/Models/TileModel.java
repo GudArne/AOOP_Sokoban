@@ -60,6 +60,13 @@ public class TileModel {
             e.printStackTrace();
         }
     }
+    public boolean checkMarked(int x, int y){
+        x = x/ gamePanel.tileSize;
+        y = y/ gamePanel.tileSize;
+        if(tiles.get(numTiles.get(y).get(x)).marked)
+            return true;
+        else return false;
+    }
 
     public int getTile(int x, int y)
     {

@@ -43,17 +43,16 @@ public class CrateModel {
         }
         return null;
     }
-    public void swapImage(int x, int y) {
+    public void swapImage(Crate crate) {
         try {
-            if(!getCrate(x, y).marked)
-                getCrate(x,y).image = ImageIO.read(new File("src/Resources/Objects/cratemarked.png"));
-            else
-                getCrate(x,y).image = ImageIO.read(new File("src/Resources/Objects/crate.png"));
+            if(!crate.marked && tileModel.checkMarked(crate.xPos, crate.yPos))
+                crate.image = ImageIO.read(new File("src/Resources/Objects/cratemarked.png"));
+            else if(crate.marked && !tileModel.checkMarked(crate.xPos, crate.yPos))
+                crate.image = ImageIO.read(new File("src/Resources/Objects/crate.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     public boolean checkIfWon(){
         for(int i = 0; i < objectArrayList.size(); i++){
@@ -92,23 +91,13 @@ public class CrateModel {
     }
     public void moveCrate(Crate crate, String direction){
         switch (direction){
-            case "up" -> {
-                crate.setyPos(crate.yPos - gamePanel.tileSize);
-            }
-            case "down" -> {
-                crate.yPos += gamePanel.tileSize;
-            }
-            case "left" -> {
-                crate.xPos -= gamePanel.tileSize;
-            }
-            case "right" -> {setCrateX(crate, 0);
-            }
+            case "up" -> crate.setyPos(crate.yPos - gamePanel.tileSize);
+            case "down" -> crate.setyPos(crate.yPos + gamePanel.tileSize);
+            case "left" -> crate.setxPos(crate.xPos - gamePanel.tileSize);
+            case "right" -> crate.setxPos(crate.xPos + gamePanel.tileSize);
         }
     }
     public ArrayList<Crate> getObjectArrayList() {
         return objectArrayList;
-    }
-    public void setCrateX(Crate crate, int x){
-        objectArrayList.get(x).xPos += gamePanel.tileSize;
     }
 }
