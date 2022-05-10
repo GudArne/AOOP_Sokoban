@@ -5,6 +5,7 @@ import javax.swing.event.ChangeEvent;
 
 import Controller.KeyHandler;
 import Models.DataModel;
+import Models.PlayerModel;
 import Models.TileModel;
 import Views.CrateView;
 import Views.TileView;
@@ -24,11 +25,13 @@ public class GamePanel extends JPanel implements ChangeListener{
     TileView tileView = new TileView(this);
     TileModel tileModel = new TileModel(this);
     CrateView crateView = new CrateView(this,tileModel);
+    PlayerModel playerModel;
 
 
     public GamePanel(DataModel dataModel) {
 
         this.dataModel = dataModel;
+        this.playerModel = new PlayerModel(this, dataModel);
         this.add(new JLabel("test"));
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.WHITE);
@@ -36,6 +39,9 @@ public class GamePanel extends JPanel implements ChangeListener{
         this.addKeyListener(new KeyHandler(dataModel));
         this.setFocusable(true);
 
+    }
+    public DataModel getDataModel(){
+        return dataModel;
     }
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
@@ -55,6 +61,7 @@ public class GamePanel extends JPanel implements ChangeListener{
     @Override
     public void stateChanged(ChangeEvent e) {
         //a = dataModel.getData();
+        playerModel.update();
         repaint();
         System.out.println("stateChanged");
         

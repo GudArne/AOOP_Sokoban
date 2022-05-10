@@ -3,6 +3,7 @@ package Models;
 import Entities.Player;
 import Controller.KeyHandler;
 import Main.GamePanel;
+import Models.DataModel;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -10,10 +11,11 @@ import java.io.File;
 public class PlayerModel extends Player {
     KeyHandler keyHandler;
     GamePanel gamePanel;
+    DataModel dataModel;
 
-    public PlayerModel(GamePanel gamePanel, KeyHandler keyHandler){
+    public PlayerModel(GamePanel gamePanel, DataModel dataModel) {
         this.gamePanel = gamePanel;
-        this.keyHandler = keyHandler;
+        this.dataModel = dataModel;
 
         worldX = 0;
         worldY = 0;
@@ -33,19 +35,23 @@ public class PlayerModel extends Player {
         }
     }
     public void update(){
-        if(keyHandler.anyPressed) {
-            if (keyHandler.up) {
-            }
-            else if (keyHandler.down) {
-
-            }
-            else if(keyHandler.left){
-
-            }
-            else if (keyHandler.right){
-
-            }
+        if(dataModel.getData() == "up")
+        {
+            System.out.println("update: up");
         }
+        if(dataModel.getData() == "down")
+        {
+            System.out.println("update: down");
+        }
+        if(dataModel.getData() == "left")
+        {
+            System.out.println("update: left");
+        }
+        if(dataModel.getData() == "right")
+        {
+            System.out.println("update: right");
+        }
+
     }
 
     public int getX(){
