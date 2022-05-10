@@ -8,6 +8,8 @@ import Models.DataModel;
 
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.util.Objects;
+
 import Models.TileModel;
 public class PlayerModel extends Player {
     GamePanel gamePanel;
@@ -42,7 +44,7 @@ public class PlayerModel extends Player {
     }
     public void update(){
         String direction = dataModel.getData();
-        if(direction == "up" && checkCollision(direction))
+        if(Objects.equals(direction, "up") && checkCollision(direction))
         {
             Crate crate = crateModel.getCrate(worldX, checkNext(direction));
             if(crate == null)
@@ -56,22 +58,22 @@ public class PlayerModel extends Player {
             //if(check crate)
             System.out.println("player: up");
         }
-        else if(direction == "down" && checkCollision(direction))
+        else if(Objects.equals(direction, "down") && checkCollision(direction))
         {
             System.out.println("player: down");
         }
-        else if(direction == "left" && checkCollision(direction))
+        else if(Objects.equals(direction, "left") && checkCollision(direction))
         {
             System.out.println("player: left");
         }
-        else if(direction == "right" && checkCollision(direction))
+        else if(Objects.equals(direction, "right") && checkCollision(direction))
         {
             Crate crate = crateModel.getCrate(checkNext(direction), worldY);
             if(crate == null)
                 worldX +=gamePanel.tileSize;
             else if(crateModel.checkCrateCollision(direction,worldX,worldY)){
                 crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(checkNext(direction),worldY);
+                crateModel.swapImage(crate.xPos, crate.yPos);
                 worldX += gamePanel.tileSize;
             }
         }
@@ -109,7 +111,7 @@ public class PlayerModel extends Player {
     public int checkNext(String direction){
         int retInt = 0;
         switch (direction){
-            case "up" -> retInt =worldY - gamePanel.tileSize;
+            case "up" -> retInt = worldY - gamePanel.tileSize;
             case "down" ->retInt = worldY + gamePanel.tileSize;
             case "left" -> retInt = worldX - gamePanel.tileSize;
             case "right" -> retInt = worldX + gamePanel.tileSize;
