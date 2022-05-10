@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements ChangeListener{
 
         this.dataModel = dataModel;
         this.playerModel = new PlayerModel(this, dataModel,tileModel);
-        this.playerView = new PlayerView(this,dataModel,tileModel);
+        this.playerView = new PlayerView(this,dataModel,tileModel,playerModel);
         this.add(new JLabel("test"));
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.WHITE);
