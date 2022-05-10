@@ -11,10 +11,9 @@ public class CrateView{
     CrateModel crateModel;
     GamePanel gamePanel;
     DataModel dataModel;
-    public CrateView(GamePanel gamePanel, CrateModel crateModel, DataModel dataModel) {
+    public CrateView(GamePanel gamePanel, CrateModel crateModel) {
         this.crateModel = crateModel;
         this.gamePanel = gamePanel;
-        this.dataModel = dataModel;
     }
 
     public void draw(Graphics2D graphics2D) { //view

@@ -26,9 +26,7 @@ public class GamePanel extends JPanel implements ChangeListener{
     DataModel dataModel;
     TileView tileView = new TileView(this);
     TileModel tileModel = new TileModel(this);
-    
-    CrateModel crateModel = new CrateModel(this,tileModel);
-    CrateView crateView = new CrateView(this,crateModel,dataModel );
+
     CrateModel crateModel;
     CrateView crateView;
     PlayerModel playerModel;
@@ -61,11 +59,11 @@ public class GamePanel extends JPanel implements ChangeListener{
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
 
-            tileView.draw(graphics2D);
-            crateView.draw(graphics2D);
-            playerView.draw(graphics2D);
+        tileView.draw(graphics2D);
+        crateView.draw(graphics2D);
+        playerView.draw(graphics2D);
 
-            graphics2D.dispose();
+        graphics2D.dispose();
         // }
     }
 
@@ -75,7 +73,7 @@ public class GamePanel extends JPanel implements ChangeListener{
         playerModel.update();
         repaint();
         //System.out.println("stateChanged");
-        
+
     }
 
 }
