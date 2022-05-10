@@ -45,9 +45,9 @@ public class CrateModel {
     public void swapImage(int x, int y) {
         try {
             if(!getCrate(x, y).marked)
-                getCrate(x,y).image = ImageIO.read(new File("Pictures/Crate/cratemarked.png"));
+                getCrate(x,y).image = ImageIO.read(new File("src/Resources/Objects/cratemarked.png"));
             else
-                getCrate(x,y).image = ImageIO.read(new File("Pictures/Crate/crate.png"));
+                getCrate(x,y).image = ImageIO.read(new File("src/Resources/Objects/crate.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
