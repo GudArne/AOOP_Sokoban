@@ -8,6 +8,11 @@ public class Player {
     public BufferedImage playerImage;
 
     public int playerX,playerY;
+    public Player(int playerX, int playerY, BufferedImage playerImage){
+        this.playerX = playerX;
+        this.playerY = playerY;
+        this.playerImage = playerImage;
+    }
 
     // return playerX
     public int getPlayerX() {

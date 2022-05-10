@@ -7,33 +7,30 @@ import Main.GamePanel;
 import Models.DataModel;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Objects;
 
 import Models.TileModel;
-public class PlayerModel extends Player {
+public class PlayerModel {
     GamePanel gamePanel;
     DataModel dataModel;
     TileModel tileModel;
 
     CrateModel crateModel;
+    BufferedImage playerImage;
 
+    Player player;
     public PlayerModel(GamePanel gamePanel, DataModel dataModel, TileModel tileModel) {
         this.gamePanel = gamePanel;
         this.dataModel = dataModel;
         this.tileModel = tileModel;
         crateModel = new CrateModel(gamePanel,tileModel);
 
-        playerX = 0;
-        playerY = 0;
-
-        setStart();
         setImage();
+        player = new Player(gamePanel.tileSize, 2 * gamePanel.tileSize, playerImage);
     }
-     public void setStart(){
-         playerY = 2* gamePanel.tileSize;
-         playerX = gamePanel.tileSize;
-     }
+
 
     public void setImage(){
         try {
@@ -46,15 +43,15 @@ public class PlayerModel extends Player {
         String direction = dataModel.getData();
         if(Objects.equals(direction, "up") && checkCollision(direction))
         {
-            Crate crate = crateModel.getCrate(playerX, checkNext(direction));
+            Crate crate = crateModel.getCrate(player.playerX, checkNext(direction));
             if(crate == null){
-                playerY -=gamePanel.tileSize;
+                player.playerY -=gamePanel.tileSize;
                 System.out.println("player: up");
             }
-            else if(crateModel.checkCrateCollision(direction,playerX, playerY)){
+            else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(playerX,checkNext(direction));
-             playerY -= gamePanel.tileSize;
+                crateModel.swapImage(player.playerX,checkNext(direction));
+                player.playerY -= gamePanel.tileSize;
             }
 
             //if(check crate)
@@ -70,36 +67,36 @@ public class PlayerModel extends Player {
         }
         else if(Objects.equals(direction, "right") && checkCollision(direction))
         {
-            Crate crate = crateModel.getCrate(checkNext(direction), playerY);
+            Crate crate = crateModel.getCrate(checkNext(direction), player.playerY);
             if(crate == null){
-                playerX +=gamePanel.tileSize; //move player
+                player.playerX +=gamePanel.tileSize; //move player
                 System.out.println("player: right");
             }
-            else if(crateModel.checkCrateCollision(direction,playerX, playerY)){
+            else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate.xPos, crate.yPos);
-                playerX += gamePanel.tileSize;
+                player.playerX += gamePanel.tileSize;
             }
         }
-        System.out.println(playerY +  " \n" + playerX);
+        System.out.println(player.playerY +  " \n" + player.playerX);
 
     }
     public boolean checkCollision(String direction){
         switch (direction){
             case "up" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(playerX, playerY - gamePanel.tileSize)).collision)
+                if(!tileModel.tiles.get(tileModel.getTile(player.playerX, player.playerY - gamePanel.tileSize)).collision)
                     return true;
             }
             case "down" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(playerX, playerY + gamePanel.tileSize)).collision)
+                if(!tileModel.tiles.get(tileModel.getTile(player.playerX, player.playerY + gamePanel.tileSize)).collision)
                     return true;
             }
             case "left" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(playerX - gamePanel.tileSize, playerY)).collision)
+                if(!tileModel.tiles.get(tileModel.getTile(player.playerX - gamePanel.tileSize, player.playerY)).collision)
                     return true;
             }
             case "right" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(playerX + gamePanel.tileSize, playerY)).collision)
+                if(!tileModel.tiles.get(tileModel.getTile(player.playerX + gamePanel.tileSize, player.playerY)).collision)
                     return true;
             }
         }
@@ -107,20 +104,24 @@ public class PlayerModel extends Player {
     }
 
     public int getX(){
-        return playerX;
+        return player.playerX;
     }
     public int getY(){
-        return playerY;
+        return player.playerY;
     }
 
     public int checkNext(String direction){
         int retInt = 0;
         switch (direction){
-            case "up" -> retInt = playerY - gamePanel.tileSize;
-            case "down" ->retInt = playerY + gamePanel.tileSize;
-            case "left" -> retInt = playerX - gamePanel.tileSize;
-            case "right" -> retInt = playerX + gamePanel.tileSize;
+            case "up" -> retInt = player.playerY - gamePanel.tileSize;
+            case "down" ->retInt = player.playerY + gamePanel.tileSize;
+            case "left" -> retInt = player.playerX - gamePanel.tileSize;
+            case "right" -> retInt = player.playerX + gamePanel.tileSize;
         }
         return retInt;
+    }
+
+    public BufferedImage getPlayerImage() {
+        return playerImage;
     }
 }
