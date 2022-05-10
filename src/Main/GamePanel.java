@@ -56,13 +56,11 @@ public class GamePanel extends JPanel implements ChangeListener{
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
-        // if(interreaction.checkIfWon()){
-        //     gameOver.draw(graphics2D);
-        // }
-        // else {
+
             tileView.draw(graphics2D);
-            playerView.draw(graphics2D);
             crateView.draw(graphics2D);
+            playerView.draw(graphics2D);
+
            graphics2D.dispose();
         // }
     }

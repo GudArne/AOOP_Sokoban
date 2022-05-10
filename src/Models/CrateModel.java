@@ -21,6 +21,7 @@ public class CrateModel {
         setObjects();
     }
 
+
     private void setObjects(){ // Sets the crates in the game
         try {
             objectArrayList.add(new Crate(3* gamePanel.tileSize, 2* gamePanel.tileSize, ImageIO.read(new File("src/Resources/Objects/crate.png")),false));
@@ -100,12 +101,14 @@ public class CrateModel {
             case "left" -> {
                 crate.xPos -= gamePanel.tileSize;
             }
-            case "right" -> {
-                crate.setxPos(crate.xPos + gamePanel.tileSize);
+            case "right" -> {setCrateX(crate, 0);
             }
         }
     }
     public ArrayList<Crate> getObjectArrayList() {
         return objectArrayList;
+    }
+    public void setCrateX(Crate crate, int x){
+        objectArrayList.get(x).xPos += gamePanel.tileSize;
     }
 }
