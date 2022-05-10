@@ -34,7 +34,7 @@ public class CrateModel {
             e.printStackTrace();
         }
     }
-    public Crate getObject(int x, int y){
+    public Crate getCrate(int x, int y){
         for(int i = 0; i<objectArrayList.size();i++)
         {
             if(objectArrayList.get(i).yPos == y && objectArrayList.get(i).xPos == x)
@@ -44,10 +44,10 @@ public class CrateModel {
     }
     public void swapImage(int x, int y) {
         try {
-            if(!getObject(x, y).marked)
-                getObject(x,y).image = ImageIO.read(new File("Pictures/Crate/cratemarked.png"));
+            if(!getCrate(x, y).marked)
+                getCrate(x,y).image = ImageIO.read(new File("Pictures/Crate/cratemarked.png"));
             else
-                getObject(x,y).image = ImageIO.read(new File("Pictures/Crate/crate.png"));
+                getCrate(x,y).image = ImageIO.read(new File("Pictures/Crate/crate.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,29 +64,45 @@ public class CrateModel {
     public boolean checkCrateCollision(String s, int x, int y){
         switch (s){
             case "up" -> {
-                if (!tileModel.tiles.get(tileModel.getTile(x, y - 2 * gamePanel.tileSize)).collision && getObject(x, y - 2 * gamePanel.tileSize) == null) {
+                if (!tileModel.tiles.get(tileModel.getTile(x, y - 2 * gamePanel.tileSize)).collision && getCrate(x, y - 2 * gamePanel.tileSize) == null) {
                     return true;
                 }
             }
 
             case "down" -> {
-                if (!tileModel.tiles.get(tileModel.getTile(x, y + 2 * gamePanel.tileSize)).collision && getObject(x, y + 2 * gamePanel.tileSize) == null) {
+                if (!tileModel.tiles.get(tileModel.getTile(x, y + 2 * gamePanel.tileSize)).collision && getCrate(x, y + 2 * gamePanel.tileSize) == null) {
                     return true;
                 }
             }
 
             case "left" -> {
-                if (!tileModel.tiles.get(tileModel.getTile(x - 2 * gamePanel.tileSize, y )).collision && getObject(x - 2 * gamePanel.tileSize, y ) == null) {
+                if (!tileModel.tiles.get(tileModel.getTile(x - 2 * gamePanel.tileSize, y )).collision && getCrate(x - 2 * gamePanel.tileSize, y ) == null) {
                     return  true;
                 }
             }
 
             case "right" -> {
-                if (!tileModel.tiles.get(tileModel.getTile(x + 2 * gamePanel.tileSize, y)).collision && getObject(x + 2 * gamePanel.tileSize, y) == null) {
+                if (!tileModel.tiles.get(tileModel.getTile(x + 2 * gamePanel.tileSize, y)).collision && getCrate(x + 2 * gamePanel.tileSize, y) == null) {
                     return true;
                 }
             }
         }
         return false;
+    }
+    public void moveCrate(Crate crate, String direction){
+        switch (direction){
+            case "up" -> {
+                crate.yPos -= gamePanel.tileSize;
+            }
+            case "down" -> {
+                crate.yPos += gamePanel.tileSize;
+            }
+            case "left" -> {
+                crate.xPos -= gamePanel.tileSize;
+            }
+            case "right" -> {
+                crate.xPos += gamePanel.tileSize;
+            }
+        }
     }
 }
