@@ -21,6 +21,6 @@ public class PlayerView extends PlayerModel {
         this.tileModel = tileModel;
     }
     public void draw(Graphics2D graphics2D){
-        graphics2D.drawImage(playerImage,worldX,worldY, gamePanel.tileSize,gamePanel.tileSize,null);
+        graphics2D.drawImage(playerImage,getPlayerX(),getPlayerY(), gamePanel.tileSize,gamePanel.tileSize,null);
     }
 }

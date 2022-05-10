@@ -24,15 +24,15 @@ public class PlayerModel extends Player {
         this.tileModel = tileModel;
         crateModel = new CrateModel(gamePanel,tileModel);
 
-        worldX = 0;
-        worldY = 0;
+        playerX = 0;
+        playerY = 0;
 
         setStart();
         setImage();
     }
      public void setStart(){
-         worldY = 2* gamePanel.tileSize;
-         worldX = gamePanel.tileSize;
+         playerY = 2* gamePanel.tileSize;
+         playerX = gamePanel.tileSize;
      }
 
     public void setImage(){
@@ -46,13 +46,15 @@ public class PlayerModel extends Player {
         String direction = dataModel.getData();
         if(Objects.equals(direction, "up") && checkCollision(direction))
         {
-            Crate crate = crateModel.getCrate(worldX, checkNext(direction));
-            if(crate == null)
-                worldY -=gamePanel.tileSize;
-            else if(crateModel.checkCrateCollision(direction,worldX,worldY)){
+            Crate crate = crateModel.getCrate(playerX, checkNext(direction));
+            if(crate == null){
+                playerY -=gamePanel.tileSize;
+                System.out.println("player: up");
+            }
+            else if(crateModel.checkCrateCollision(direction,playerX, playerY)){
                 crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(worldX,checkNext(direction));
-                worldY -= gamePanel.tileSize;
+                crateModel.swapImage(playerX,checkNext(direction));
+             playerY -= gamePanel.tileSize;
             }
 
             //if(check crate)
@@ -68,13 +70,15 @@ public class PlayerModel extends Player {
         }
         else if(Objects.equals(direction, "right") && checkCollision(direction))
         {
-            Crate crate = crateModel.getCrate(checkNext(direction), worldY);
-            if(crate == null)
-                worldX +=gamePanel.tileSize;
-            else if(crateModel.checkCrateCollision(direction,worldX,worldY)){
+            Crate crate = crateModel.getCrate(checkNext(direction), playerY);
+            if(crate == null){
+                playerX +=gamePanel.tileSize; //move player
+                System.out.println("player: right");
+            }
+            else if(crateModel.checkCrateCollision(direction,playerX, playerY)){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate.xPos, crate.yPos);
-                worldX += gamePanel.tileSize;
+                playerX += gamePanel.tileSize;
             }
         }
 
@@ -82,19 +86,19 @@ public class PlayerModel extends Player {
     public boolean checkCollision(String direction){
         switch (direction){
             case "up" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(worldX, worldY - gamePanel.tileSize)).collision)
+                if(!tileModel.tiles.get(tileModel.getTile(playerX, playerY - gamePanel.tileSize)).collision)
                     return true;
             }
             case "down" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(worldX, worldY + gamePanel.tileSize)).collision)
+                if(!tileModel.tiles.get(tileModel.getTile(playerX, playerY + gamePanel.tileSize)).collision)
                     return true;
             }
             case "left" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(worldX - gamePanel.tileSize, worldY)).collision)
+                if(!tileModel.tiles.get(tileModel.getTile(playerX - gamePanel.tileSize, playerY)).collision)
                     return true;
             }
             case "right" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(worldX + gamePanel.tileSize, worldY)).collision)
+                if(!tileModel.tiles.get(tileModel.getTile(playerX + gamePanel.tileSize, playerY)).collision)
                     return true;
             }
         }
@@ -102,19 +106,19 @@ public class PlayerModel extends Player {
     }
 
     public int getX(){
-        return worldX;
+        return playerX;
     }
     public int getY(){
-        return worldY;
+        return playerY;
     }
 
     public int checkNext(String direction){
         int retInt = 0;
         switch (direction){
-            case "up" -> retInt = worldY - gamePanel.tileSize;
-            case "down" ->retInt = worldY + gamePanel.tileSize;
-            case "left" -> retInt = worldX - gamePanel.tileSize;
-            case "right" -> retInt = worldX + gamePanel.tileSize;
+            case "up" -> retInt = playerY - gamePanel.tileSize;
+            case "down" ->retInt = playerY + gamePanel.tileSize;
+            case "left" -> retInt = playerX - gamePanel.tileSize;
+            case "right" -> retInt = playerX + gamePanel.tileSize;
         }
         return retInt;
     }
