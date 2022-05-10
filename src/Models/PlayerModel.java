@@ -95,7 +95,7 @@ public class PlayerModel {
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
-                //crateModel.swapImage(crate.xPos+ gamePanel.tileSize, crate.yPos);
+                //crateModel.swapImage(crate.xPos, crate.yPos);
                 player.playerX += gamePanel.tileSize;
             }
         }
