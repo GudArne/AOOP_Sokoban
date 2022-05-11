@@ -32,7 +32,8 @@ public class PlayerModel {
     }
 
 
-    public void setImage(){
+
+    private void setImage(){
         try {
             playerImage = ImageIO.read(new File("src/Resources/Player/player.png"));
         } catch (Exception e) {
@@ -108,7 +109,7 @@ public class PlayerModel {
         System.out.println(player.playerY +  " \n" + player.playerX);
 
     }
-    public boolean checkCollision(String direction){
+    private boolean checkCollision(String direction){
         switch (direction){
             case "up" ->{
                 if(!tileModel.tiles.get(tileModel.getTile(player.playerX, player.playerY - gamePanel.tileSize)).collision)
