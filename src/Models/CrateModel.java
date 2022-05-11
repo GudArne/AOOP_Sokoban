@@ -2,21 +2,26 @@ package Models;
 
 import Entities.Crate;
 import Main.GamePanel;
+import Views.StatsView;
 
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.net.CacheRequest;
 import java.util.ArrayList;
 
 public class CrateModel {
     GamePanel gamePanel;
     public ArrayList<Crate> objectArrayList;
     public TileModel tileModel;
+    private int crateMarked = 0;
+    StatsView statsView;
     //TODO get funktioner
 
-    public CrateModel(GamePanel gamePanel, TileModel tileModel){
+    public CrateModel(GamePanel gamePanel, TileModel tileModel, StatsView statsView) {
         this.gamePanel = gamePanel;
         objectArrayList = new ArrayList<>();
         this.tileModel = tileModel;
+        this.statsView = statsView;
         setObjects();
         checkStart();
     }
@@ -31,14 +36,16 @@ public class CrateModel {
             objectArrayList.add(new Crate(1* gamePanel.tileSize, 6* gamePanel.tileSize, ImageIO.read(new File("src/Resources/Objects/crate.png")),false));
             objectArrayList.add(new Crate(4* gamePanel.tileSize, 6* gamePanel.tileSize, ImageIO.read(new File("src/Resources/Objects/crate.png")),false));
             objectArrayList.add(new Crate(5* gamePanel.tileSize, 6* gamePanel.tileSize, ImageIO.read(new File("src/Resources/Objects/crate.png")),false));
+            crateMarked = 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     private void checkStart(){
         for(Crate crate: objectArrayList){
-            if(tileModel.checkMarked(crate.getxPos(), crate.getyPos()))
+            if(tileModel.checkMarked(crate.getxPos(), crate.getyPos())){
                 swapImage(crate);
+            }
         }
     }
     public Crate getCrate(int x, int y){
@@ -54,10 +61,12 @@ public class CrateModel {
             if(!crate.getMarked() && tileModel.checkMarked(crate.getxPos(), crate.getyPos())){
                 crate.image = ImageIO.read(new File("src/Resources/Objects/cratemarked.png"));
                 crate.setMarked(true);
+                statsView.setMarkedCrates(crateMarked++);
             }
             else if(crate.getMarked() && !tileModel.checkMarked(crate.getxPos(), crate.getyPos())){
                 crate.image = ImageIO.read(new File("src/Resources/Objects/crate.png"));
                 crate.setMarked(false);
+                statsView.setMarkedCrates(crateMarked--);
             }
         } catch (Exception e) {
             e.printStackTrace();

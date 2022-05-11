@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.Objects;
 
 import Models.TileModel;
+import Views.StatsView;
 public class PlayerModel {
     GamePanel gamePanel;
     DataModel dataModel;
@@ -20,13 +21,18 @@ public class PlayerModel {
     CrateModel crateModel;
     BufferedImage playerImage;
     private int stepCount = 0;
+    private int attempts = 0;
+    StatsView statsView;
+
 
     Player player;
-    public PlayerModel(GamePanel gamePanel, DataModel dataModel, TileModel tileModel, CrateModel crateModel) {
+    public PlayerModel(GamePanel gamePanel, DataModel dataModel, TileModel tileModel, CrateModel crateModel, StatsView statsView) {
         this.gamePanel = gamePanel;
         this.dataModel = dataModel;
         this.tileModel = tileModel;
         this.crateModel = crateModel;
+        this.statsView = statsView;
+        
 
         setImage();
         player = new Player(gamePanel.tileSize, 2 * gamePanel.tileSize, playerImage);
@@ -49,12 +55,14 @@ public class PlayerModel {
             if(crate == null){
                 player.playerY -=gamePanel.tileSize;
                 setStepCount(getStepCount() + 1);
+                statsView.setStepCounterLabel(getStepCount());
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
                 player.playerY -= gamePanel.tileSize;
                 setStepCount(getStepCount() + 1);
+                statsView.setStepCounterLabel(getStepCount());
             }
         }
         else if(Objects.equals(direction, "down") && checkCollision(direction))
@@ -63,12 +71,14 @@ public class PlayerModel {
             if(crate == null){
                 player.playerY +=gamePanel.tileSize;
                 setStepCount(getStepCount() + 1);
+                statsView.setStepCounterLabel(getStepCount());
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
                 player.playerY += gamePanel.tileSize;
                 setStepCount(getStepCount() + 1);
+                statsView.setStepCounterLabel(getStepCount());
             }
         }
         else if(Objects.equals(direction, "left") && checkCollision(direction))
@@ -77,12 +87,14 @@ public class PlayerModel {
             if(crate == null){
                 player.playerX -=gamePanel.tileSize; //move player
                 setStepCount(getStepCount() + 1);
+                statsView.setStepCounterLabel(getStepCount());
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
                 player.playerX -= gamePanel.tileSize;
                 setStepCount(getStepCount() + 1);
+                statsView.setStepCounterLabel(getStepCount());
             }
         }
         else if(Objects.equals(direction, "right") && checkCollision(direction))
@@ -91,12 +103,14 @@ public class PlayerModel {
             if(crate == null){
                 player.playerX +=gamePanel.tileSize; //move player
                 setStepCount(getStepCount() + 1);
+                statsView.setStepCounterLabel(getStepCount());
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
                 player.playerX += gamePanel.tileSize;
                 setStepCount(getStepCount() + 1);
+                statsView.setStepCounterLabel(getStepCount());
             }
         }
         if(Objects.equals(direction, "esc"))
@@ -152,6 +166,11 @@ public class PlayerModel {
         return playerImage;
     }
     private void setRestart(){
+        setAttempts(getAttempts() + 1);
+        statsView.setAttemptsLabel("Attempts:", getAttempts());
+        setStepCount(0);
+        statsView.setMarkedCrates(1);
+        statsView.setStepCounterLabel(getStepCount());
         player.setPlayerX(gamePanel.tileSize);
         player.setPlayerY(2 * gamePanel.tileSize);
     }
@@ -160,5 +179,11 @@ public class PlayerModel {
     }
     public void setStepCount(int stepCount){
         this.stepCount = stepCount;
+    }
+    public int getAttempts(){
+        return attempts;
+    }
+    public void setAttempts(int attempts){
+        this.attempts = attempts;
     }
 }
