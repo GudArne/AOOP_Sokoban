@@ -19,6 +19,7 @@ public class CrateModel {
         objectArrayList = new ArrayList<>();
         this.tileModel = tileModel;
         setObjects();
+        checkStart();
     }
 
 
@@ -35,6 +36,12 @@ public class CrateModel {
             e.printStackTrace();
         }
     }
+    private void checkStart(){
+        for(Crate crate: objectArrayList){
+            if(tileModel.checkMarked(crate.xPos, crate.yPos))
+                swapImage(crate);
+        }
+    }
     public Crate getCrate(int x, int y){
         for(int i = 0; i<objectArrayList.size();i++)
         {
@@ -45,10 +52,14 @@ public class CrateModel {
     }
     public void swapImage(Crate crate) {
         try {
-            if(!crate.marked && tileModel.checkMarked(crate.xPos, crate.yPos))
+            if(!crate.marked && tileModel.checkMarked(crate.xPos, crate.yPos)){
                 crate.image = ImageIO.read(new File("src/Resources/Objects/cratemarked.png"));
-            else if(crate.marked && !tileModel.checkMarked(crate.xPos, crate.yPos))
+                crate.marked = true;
+            }
+            else if(crate.marked && !tileModel.checkMarked(crate.xPos, crate.yPos)){
                 crate.image = ImageIO.read(new File("src/Resources/Objects/crate.png"));
+                crate.marked = false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,6 +70,7 @@ public class CrateModel {
             if(!objectArrayList.get(i).marked)
                 return false;
         }
+        System.out.println("Victorious");
         return true;
     }
     public boolean checkCrateCollision(String s, int x, int y){
@@ -99,5 +111,10 @@ public class CrateModel {
     }
     public ArrayList<Crate> getObjectArrayList() {
         return objectArrayList;
+    }
+    public void setRestart(){
+        objectArrayList.clear();
+        setObjects();
+        checkStart();
     }
 }

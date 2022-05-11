@@ -99,6 +99,12 @@ public class PlayerModel {
                 player.playerX += gamePanel.tileSize;
             }
         }
+        if(Objects.equals(direction, "esc"))
+        {
+            setRestart();
+            crateModel.setRestart();
+        }
+        crateModel.checkIfWon();
         System.out.println(player.playerY +  " \n" + player.playerX);
 
     }
@@ -144,5 +150,9 @@ public class PlayerModel {
 
     public BufferedImage getPlayerImage() {
         return playerImage;
+    }
+    private void setRestart(){
+        player.setPlayerX(gamePanel.tileSize);
+        player.setPlayerY(2 * gamePanel.tileSize);
     }
 }
