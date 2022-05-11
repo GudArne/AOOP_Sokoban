@@ -80,7 +80,6 @@ public class CrateModel {
             if(!objectArrayList.get(i).marked)
                 return false;
         }
-        System.out.println("Victorious");
         return true;
     }
     public boolean checkCrateCollision(String s, int x, int y){

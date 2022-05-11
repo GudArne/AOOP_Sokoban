@@ -149,13 +149,19 @@ public class PlayerModel {
         return playerImage;
     }
     private void setRestart(){
-        setAttempts(getAttempts() + 1);
+        if(crateModel.checkIfWon()){
+            setAttempts(0);
+        }
+        else
+            setAttempts(getAttempts() + 1);
+
         statsView.setAttemptsLabel("Attempts:", getAttempts());
         setStepCount(0);
         statsView.setMarkedCrates(1);
         statsView.setStepCounterLabel(getStepCount());
         player.setPlayerX(gamePanel.tileSize);
         player.setPlayerY(2 * gamePanel.tileSize);
+
     }
     public int getStepCount(){
         return stepCount;
