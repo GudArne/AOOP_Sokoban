@@ -45,78 +45,65 @@ public class PlayerModel {
     }
     public void update(){
         String direction = dataModel.getData();
-        if(Objects.equals(direction, "up") && checkCollision(direction))
-        {
-            Crate crate = crateModel.getCrate(getX(), checkNext(direction));
-            if(crate == null){
-                updatePlayer(direction);
-                setStepCount(getStepCount() + 1);
-                statsView.setStepCounterLabel(getStepCount());
-            }
-            else if(crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())){
-                crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(crate);
-                updatePlayer(direction);
-                setStepCount(getStepCount() + 1);
-                statsView.setStepCounterLabel(getStepCount());
-            }
-        }
-        else if(Objects.equals(direction, "down") && checkCollision(direction))
-        {
-            Crate crate = crateModel.getCrate(getX(), checkNext(direction));
-            if(crate == null){
-                updatePlayer(direction);
-                setStepCount(getStepCount() + 1);
-                statsView.setStepCounterLabel(getStepCount());
-            }
-            else if(crateModel.checkCrateCollision(direction, crate.getxPos(), crate.yPos)){
-                crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(crate);
-                updatePlayer(direction);
-                setStepCount(getStepCount() + 1);
-                statsView.setStepCounterLabel(getStepCount());
-            }
-        }
-        else if(Objects.equals(direction, "left") && checkCollision(direction))
-        {
-            Crate crate = crateModel.getCrate(checkNext(direction), getY());
-            if(crate == null){
-                updatePlayer(direction); //move player
-                setStepCount(getStepCount() + 1);
-                statsView.setStepCounterLabel(getStepCount());
-            }
-            else if(crateModel.checkCrateCollision(direction,crate.getxPos(), crate.getyPos())){
-                crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(crate);
-                updatePlayer(direction);
-                setStepCount(getStepCount() + 1);
-                statsView.setStepCounterLabel(getStepCount());
-            }
-        }
-        else if(Objects.equals(direction, "right") && checkCollision(direction))
-        {
-            Crate crate = crateModel.getCrate(checkNext(direction), getY());
-            if(crate == null){
-                updatePlayer(direction); //move player
-                setStepCount(getStepCount() + 1);
-                statsView.setStepCounterLabel(getStepCount());
-            }
-            else if(crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())){
-                crateModel.moveCrate(crate,direction);
-                crateModel.swapImage(crate);
-                updatePlayer(direction);
-                setStepCount(getStepCount() + 1);
-                statsView.setStepCounterLabel(getStepCount());
+        if(!crateModel.checkIfWon()) {
+            if (Objects.equals(direction, "up") && checkCollision(direction)) {
+                Crate crate = crateModel.getCrate(getX(), checkNext(direction));
+                if (crate == null) {
+                    updatePlayer(direction);
+                    setStepCount(getStepCount() + 1);
+                    statsView.setStepCounterLabel(getStepCount());
+                } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
+                    crateModel.moveCrate(crate, direction);
+                    crateModel.swapImage(crate);
+                    updatePlayer(direction);
+                    setStepCount(getStepCount() + 1);
+                    statsView.setStepCounterLabel(getStepCount());
+                }
+            } else if (Objects.equals(direction, "down") && checkCollision(direction)) {
+                Crate crate = crateModel.getCrate(getX(), checkNext(direction));
+                if (crate == null) {
+                    updatePlayer(direction);
+                    setStepCount(getStepCount() + 1);
+                    statsView.setStepCounterLabel(getStepCount());
+                } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.yPos)) {
+                    crateModel.moveCrate(crate, direction);
+                    crateModel.swapImage(crate);
+                    updatePlayer(direction);
+                    setStepCount(getStepCount() + 1);
+                    statsView.setStepCounterLabel(getStepCount());
+                }
+            } else if (Objects.equals(direction, "left") && checkCollision(direction)) {
+                Crate crate = crateModel.getCrate(checkNext(direction), getY());
+                if (crate == null) {
+                    updatePlayer(direction); //move player
+                    setStepCount(getStepCount() + 1);
+                    statsView.setStepCounterLabel(getStepCount());
+                } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
+                    crateModel.moveCrate(crate, direction);
+                    crateModel.swapImage(crate);
+                    updatePlayer(direction);
+                    setStepCount(getStepCount() + 1);
+                    statsView.setStepCounterLabel(getStepCount());
+                }
+            } else if (Objects.equals(direction, "right") && checkCollision(direction)) {
+                Crate crate = crateModel.getCrate(checkNext(direction), getY());
+                if (crate == null) {
+                    updatePlayer(direction); //move player
+                    setStepCount(getStepCount() + 1);
+                    statsView.setStepCounterLabel(getStepCount());
+                } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
+                    crateModel.moveCrate(crate, direction);
+                    crateModel.swapImage(crate);
+                    updatePlayer(direction);
+                    setStepCount(getStepCount() + 1);
+                    statsView.setStepCounterLabel(getStepCount());
+                }
             }
         }
-        if(Objects.equals(direction, "esc"))
-        {
+        if (Objects.equals(direction, "esc")) {
             setRestart();
             crateModel.setRestart();
         }
-        crateModel.checkIfWon();
-        System.out.println("step count: " + getStepCount());
-
     }
     private boolean checkCollision(String direction){
         switch (direction){
