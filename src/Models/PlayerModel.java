@@ -4,14 +4,12 @@ import Entities.Crate;
 import Entities.Player;
 import Controller.KeyHandler;
 import Main.GamePanel;
-import Models.DataModel;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Objects;
 
-import Models.TileModel;
 import Views.StatsView;
 public class PlayerModel {
     GamePanel gamePanel;
@@ -32,12 +30,10 @@ public class PlayerModel {
         this.tileModel = tileModel;
         this.crateModel = crateModel;
         this.statsView = statsView;
-        
 
         setImage();
         player = new Player(gamePanel.tileSize, 2 * gamePanel.tileSize, playerImage);
     }
-
 
 
     private void setImage(){
@@ -51,64 +47,64 @@ public class PlayerModel {
         String direction = dataModel.getData();
         if(Objects.equals(direction, "up") && checkCollision(direction))
         {
-            Crate crate = crateModel.getCrate(player.playerX, checkNext(direction));
+            Crate crate = crateModel.getCrate(getX(), checkNext(direction));
             if(crate == null){
-                player.playerY -=gamePanel.tileSize;
+                updatePlayer(direction);
                 setStepCount(getStepCount() + 1);
                 statsView.setStepCounterLabel(getStepCount());
             }
-            else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
+            else if(crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
-                player.playerY -= gamePanel.tileSize;
+                updatePlayer(direction);
                 setStepCount(getStepCount() + 1);
                 statsView.setStepCounterLabel(getStepCount());
             }
         }
         else if(Objects.equals(direction, "down") && checkCollision(direction))
         {
-            Crate crate = crateModel.getCrate(player.playerX, checkNext(direction));
+            Crate crate = crateModel.getCrate(getX(), checkNext(direction));
             if(crate == null){
-                player.playerY +=gamePanel.tileSize;
+                updatePlayer(direction);
                 setStepCount(getStepCount() + 1);
                 statsView.setStepCounterLabel(getStepCount());
             }
-            else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
+            else if(crateModel.checkCrateCollision(direction, crate.getxPos(), crate.yPos)){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
-                player.playerY += gamePanel.tileSize;
+                updatePlayer(direction);
                 setStepCount(getStepCount() + 1);
                 statsView.setStepCounterLabel(getStepCount());
             }
         }
         else if(Objects.equals(direction, "left") && checkCollision(direction))
         {
-            Crate crate = crateModel.getCrate(checkNext(direction), player.playerY);
+            Crate crate = crateModel.getCrate(checkNext(direction), getY());
             if(crate == null){
-                player.playerX -=gamePanel.tileSize; //move player
+                updatePlayer(direction); //move player
                 setStepCount(getStepCount() + 1);
                 statsView.setStepCounterLabel(getStepCount());
             }
-            else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
+            else if(crateModel.checkCrateCollision(direction,crate.getxPos(), crate.getyPos())){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
-                player.playerX -= gamePanel.tileSize;
+                updatePlayer(direction);
                 setStepCount(getStepCount() + 1);
                 statsView.setStepCounterLabel(getStepCount());
             }
         }
         else if(Objects.equals(direction, "right") && checkCollision(direction))
         {
-            Crate crate = crateModel.getCrate(checkNext(direction), player.playerY);
+            Crate crate = crateModel.getCrate(checkNext(direction), getY());
             if(crate == null){
-                player.playerX +=gamePanel.tileSize; //move player
+                updatePlayer(direction); //move player
                 setStepCount(getStepCount() + 1);
                 statsView.setStepCounterLabel(getStepCount());
             }
-            else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
+            else if(crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
-                player.playerX += gamePanel.tileSize;
+                updatePlayer(direction);
                 setStepCount(getStepCount() + 1);
                 statsView.setStepCounterLabel(getStepCount());
             }
@@ -185,5 +181,13 @@ public class PlayerModel {
     }
     public void setAttempts(int attempts){
         this.attempts = attempts;
+    }
+    public void updatePlayer(String direction){
+        switch (direction){
+            case "up" -> player.setPlayerY(getY() - gamePanel.tileSize);
+            case "down" -> player.setPlayerY(getY() + gamePanel.tileSize);
+            case "left" -> player.setPlayerX(getX() - gamePanel.tileSize);
+            case "right" -> player.setPlayerX(getX() + gamePanel.tileSize);
+        }
     }
 }

@@ -84,25 +84,25 @@ public class CrateModel {
     public boolean checkCrateCollision(String s, int x, int y){
         switch (s){
             case "up" -> {
-                if (!tileModel.tiles.get(tileModel.getTile(x, y - 2 * gamePanel.tileSize)).collision && getCrate(x, y - 2 * gamePanel.tileSize) == null) {
+                if (!tileModel.tiles.get(tileModel.getTile(x, y - gamePanel.tileSize)).collision && getCrate(x, y - gamePanel.tileSize) == null) {
                     return true;
                 }
             }
 
             case "down" -> {
-                if (!tileModel.tiles.get(tileModel.getTile(x, y + 2 * gamePanel.tileSize)).collision && getCrate(x, y + 2 * gamePanel.tileSize) == null) {
+                if (!tileModel.tiles.get(tileModel.getTile(x, y + gamePanel.tileSize)).collision && getCrate(x, y + gamePanel.tileSize) == null) {
                     return true;
                 }
             }
 
             case "left" -> {
-                if (!tileModel.tiles.get(tileModel.getTile(x - 2 * gamePanel.tileSize, y )).collision && getCrate(x - 2 * gamePanel.tileSize, y ) == null) {
+                if (!tileModel.tiles.get(tileModel.getTile(x - gamePanel.tileSize, y )).collision && getCrate(x - gamePanel.tileSize, y ) == null) {
                     return  true;
                 }
             }
 
             case "right" -> {
-                if (!tileModel.tiles.get(tileModel.getTile(x + 2 * gamePanel.tileSize, y)).collision && getCrate(x + 2 * gamePanel.tileSize, y) == null) {
+                if (!tileModel.tiles.get(tileModel.getTile(x + gamePanel.tileSize, y)).collision && getCrate(x + gamePanel.tileSize, y) == null) {
                     return true;
                 }
             }

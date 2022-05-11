@@ -3,10 +3,8 @@ package Models;
 import Entities.Tile;
 import Main.GamePanel;
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TileModel {
     GamePanel gamePanel;
@@ -24,7 +22,7 @@ public class TileModel {
     public GamePanel getGamePanel(){
         return this.gamePanel;
     }
-    public void readMap(String map) {
+    private void readMap(String map) {
 
         int index = 0;
 
@@ -49,7 +47,7 @@ public class TileModel {
         }
     }
 
-    public void readTile() {
+    private void readTile() {
         try {
 
             tiles.add(new Tile(ImageIO.read(new File("src/Resources/Tiles/blank.png")), false,false));
