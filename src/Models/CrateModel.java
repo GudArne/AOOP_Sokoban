@@ -61,12 +61,14 @@ public class CrateModel {
             if(!crate.getMarked() && tileModel.checkMarked(crate.getxPos(), crate.getyPos())){
                 crate.image = ImageIO.read(new File("src/Resources/Objects/cratemarked.png"));
                 crate.setMarked(true);
-                statsView.setMarkedCrates(crateMarked++);
+                crateMarked++;
+                statsView.setMarkedCrates(crateMarked);
             }
             else if(crate.getMarked() && !tileModel.checkMarked(crate.getxPos(), crate.getyPos())){
                 crate.image = ImageIO.read(new File("src/Resources/Objects/crate.png"));
                 crate.setMarked(false);
-                statsView.setMarkedCrates(crateMarked--);
+                crateMarked--;
+                statsView.setMarkedCrates(crateMarked);
             }
         } catch (Exception e) {
             e.printStackTrace();
