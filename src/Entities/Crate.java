@@ -27,4 +27,16 @@ public class Crate {
     public void setMarked(boolean marked) {
         this.marked = marked;
     }
+
+    public boolean getMarked(){
+        return this.marked;
+    }
+
+    public int getxPos() {
+        return xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
+    }
 }

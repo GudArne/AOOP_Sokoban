@@ -37,7 +37,7 @@ public class CrateModel {
     }
     private void checkStart(){
         for(Crate crate: objectArrayList){
-            if(tileModel.checkMarked(crate.xPos, crate.yPos))
+            if(tileModel.checkMarked(crate.getxPos(), crate.getyPos()))
                 swapImage(crate);
         }
     }
@@ -51,13 +51,13 @@ public class CrateModel {
     }
     public void swapImage(Crate crate) {
         try {
-            if(!crate.marked && tileModel.checkMarked(crate.xPos, crate.yPos)){
+            if(!crate.getMarked() && tileModel.checkMarked(crate.getxPos(), crate.getyPos())){
                 crate.image = ImageIO.read(new File("src/Resources/Objects/cratemarked.png"));
-                crate.marked = true;
+                crate.setMarked(true);
             }
-            else if(crate.marked && !tileModel.checkMarked(crate.xPos, crate.yPos)){
+            else if(crate.getMarked() && !tileModel.checkMarked(crate.getxPos(), crate.getyPos())){
                 crate.image = ImageIO.read(new File("src/Resources/Objects/crate.png"));
-                crate.marked = false;
+                crate.setMarked(false);
             }
         } catch (Exception e) {
             e.printStackTrace();
