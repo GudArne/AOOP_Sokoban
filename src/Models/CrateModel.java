@@ -4,7 +4,6 @@ import Entities.Crate;
 import Main.GamePanel;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 

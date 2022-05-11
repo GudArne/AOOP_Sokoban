@@ -26,26 +26,23 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        if(code == KeyEvent.VK_W){
+        if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
             up = true; anyPressed = true;
             dataModel.update("up");
         }
-        if(code == KeyEvent.VK_A)
-        {
+        if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) {
             left = true; anyPressed = true;
             dataModel.update("left");
         }
-        if(code == KeyEvent.VK_S)
-        {
+        if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
             down = true; anyPressed = true;
             dataModel.update("down");
         }
-        if(code == KeyEvent.VK_D){
+        if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
             right = true; anyPressed = true;
             dataModel.update("right");
         }
-        if(code == KeyEvent.VK_ESCAPE)
-        {
+        if(code == KeyEvent.VK_ESCAPE){
             esc = true;
             dataModel.update("esc");
             System.out.println("Game restarted");

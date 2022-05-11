@@ -19,6 +19,7 @@ public class PlayerModel {
 
     CrateModel crateModel;
     BufferedImage playerImage;
+    private int stepCount = 0;
 
     Player player;
     public PlayerModel(GamePanel gamePanel, DataModel dataModel, TileModel tileModel, CrateModel crateModel) {
@@ -46,57 +47,55 @@ public class PlayerModel {
             Crate crate = crateModel.getCrate(player.playerX, checkNext(direction));
             if(crate == null){
                 player.playerY -=gamePanel.tileSize;
-                System.out.println("player: up");
+                setStepCount(getStepCount() + 1);
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
                 player.playerY -= gamePanel.tileSize;
+                setStepCount(getStepCount() + 1);
             }
-
-            //if(check crate)
-            System.out.println("player: up");
         }
         else if(Objects.equals(direction, "down") && checkCollision(direction))
         {
             Crate crate = crateModel.getCrate(player.playerX, checkNext(direction));
             if(crate == null){
                 player.playerY +=gamePanel.tileSize;
-                System.out.println("player: up");
+                setStepCount(getStepCount() + 1);
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
                 player.playerY += gamePanel.tileSize;
+                setStepCount(getStepCount() + 1);
             }
-
-            System.out.println("player: down");
         }
         else if(Objects.equals(direction, "left") && checkCollision(direction))
         {
             Crate crate = crateModel.getCrate(checkNext(direction), player.playerY);
             if(crate == null){
                 player.playerX -=gamePanel.tileSize; //move player
-                System.out.println("player: right");
+                setStepCount(getStepCount() + 1);
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
                 player.playerX -= gamePanel.tileSize;
+                setStepCount(getStepCount() + 1);
             }
-            System.out.println("player: left");
         }
         else if(Objects.equals(direction, "right") && checkCollision(direction))
         {
             Crate crate = crateModel.getCrate(checkNext(direction), player.playerY);
             if(crate == null){
                 player.playerX +=gamePanel.tileSize; //move player
-                System.out.println("player: right");
+                setStepCount(getStepCount() + 1);
             }
             else if(crateModel.checkCrateCollision(direction,player.playerX, player.playerY)){
                 crateModel.moveCrate(crate,direction);
                 crateModel.swapImage(crate);
                 player.playerX += gamePanel.tileSize;
+                setStepCount(getStepCount() + 1);
             }
         }
         if(Objects.equals(direction, "esc"))
@@ -105,7 +104,7 @@ public class PlayerModel {
             crateModel.setRestart();
         }
         crateModel.checkIfWon();
-        System.out.println(player.playerY +  " \n" + player.playerX);
+        System.out.println("step count: " + getStepCount());
 
     }
     public boolean checkCollision(String direction){
@@ -154,5 +153,11 @@ public class PlayerModel {
     private void setRestart(){
         player.setPlayerX(gamePanel.tileSize);
         player.setPlayerY(2 * gamePanel.tileSize);
+    }
+    public int getStepCount(){
+        return stepCount;
+    }
+    public void setStepCount(int stepCount){
+        this.stepCount = stepCount;
     }
 }
