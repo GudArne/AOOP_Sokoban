@@ -2,7 +2,6 @@ package Models;
 
 import Entities.Tile;
 import Main.GamePanel;
-import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -18,6 +17,12 @@ public class TileModel { // MapModel
 
         readTile();
         readMap("src/Resources/Map/map1.txt");
+    }
+    private void readTile() {
+        tiles.add(new Tile("blank", false,false));
+        tiles.add(new Tile("blankmarked", false,true));
+        tiles.add(new Tile("wall", true,false));
+
     }
     public GamePanel getGamePanel(){
         return this.gamePanel;
@@ -47,17 +52,7 @@ public class TileModel { // MapModel
         }
     }
 
-    private void readTile() {
-        try {
 
-            tiles.add(new Tile(ImageIO.read(new File("src/Resources/Tiles/blank.png")), false,false));
-            tiles.add(new Tile(ImageIO.read(new File("src/Resources/Tiles/blankmarked.png")), false,true));
-            tiles.add(new Tile(ImageIO.read(new File("src/Resources/Tiles/wall.png")), true,false));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     public boolean checkMarked(int x, int y){
         x = x/ gamePanel.tileSize;
         y = y/ gamePanel.tileSize;

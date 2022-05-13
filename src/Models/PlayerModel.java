@@ -2,12 +2,9 @@ package Models;
 
 import Entities.Crate;
 import Entities.Player;
-import Controller.KeyHandler;
 import Main.GamePanel;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.Objects;
 
 import Views.StatsView;
@@ -31,18 +28,9 @@ public class PlayerModel {
         this.crateModel = crateModel;
         this.statsView = statsView;
 
-        setImage();
-        player = new Player(gamePanel.tileSize, 2 * gamePanel.tileSize, playerImage);
+        player = new Player(gamePanel.tileSize, 2 * gamePanel.tileSize);
     }
 
-
-    private void setImage(){
-        try {
-            playerImage = ImageIO.read(new File("src/Resources/Player/player.png"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     public void update(){
         String direction = dataModel.getData();
         if(!crateModel.checkIfWon()) {
@@ -54,7 +42,7 @@ public class PlayerModel {
                     statsView.setStepCounterLabel(getStepCount());
                 } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
                     crateModel.moveCrate(crate, direction);
-                    crateModel.swapImage(crate);
+                    crateModel.swapMarked(crate);
                     updatePlayer(direction);
                     setStepCount(getStepCount() + 1);
                     statsView.setStepCounterLabel(getStepCount());
@@ -67,7 +55,7 @@ public class PlayerModel {
                     statsView.setStepCounterLabel(getStepCount());
                 } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.yPos)) {
                     crateModel.moveCrate(crate, direction);
-                    crateModel.swapImage(crate);
+                    crateModel.swapMarked(crate);
                     updatePlayer(direction);
                     setStepCount(getStepCount() + 1);
                     statsView.setStepCounterLabel(getStepCount());
@@ -80,7 +68,7 @@ public class PlayerModel {
                     statsView.setStepCounterLabel(getStepCount());
                 } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
                     crateModel.moveCrate(crate, direction);
-                    crateModel.swapImage(crate);
+                    crateModel.swapMarked(crate);
                     updatePlayer(direction);
                     setStepCount(getStepCount() + 1);
                     statsView.setStepCounterLabel(getStepCount());
@@ -93,7 +81,7 @@ public class PlayerModel {
                     statsView.setStepCounterLabel(getStepCount());
                 } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
                     crateModel.moveCrate(crate, direction);
-                    crateModel.swapImage(crate);
+                    crateModel.swapMarked(crate);
                     updatePlayer(direction);
                     setStepCount(getStepCount() + 1);
                     statsView.setStepCounterLabel(getStepCount());

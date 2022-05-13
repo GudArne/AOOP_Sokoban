@@ -3,15 +3,10 @@ package Entities;
 import java.awt.image.BufferedImage;
 
 public class Player {
-
-    public String direction;
-    public BufferedImage playerImage;
-
     public int playerX,playerY;
-    public Player(int playerX, int playerY, BufferedImage playerImage){
+    public Player(int playerX, int playerY){
         this.playerX = playerX;
         this.playerY = playerY;
-        this.playerImage = playerImage;
     }
 
     // return playerX

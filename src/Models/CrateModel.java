@@ -4,9 +4,6 @@ import Entities.Crate;
 import Main.GamePanel;
 import Views.StatsView;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.net.CacheRequest;
 import java.util.ArrayList;
 
 public class CrateModel {
@@ -29,13 +26,13 @@ public class CrateModel {
 
     private void setObjects(){ // Sets the crates in the game
         try {
-            objectArrayList.add(new Crate(3* gamePanel.tileSize, 2* gamePanel.tileSize, ImageIO.read(new File("src/Resources/Objects/crate.png")),false));
-            objectArrayList.add(new Crate(4* gamePanel.tileSize, 3* gamePanel.tileSize, ImageIO.read(new File("src/Resources/Objects/crate.png")),false));
-            objectArrayList.add(new Crate(4* gamePanel.tileSize, 4* gamePanel.tileSize, ImageIO.read(new File("src/Resources/Objects/crate.png")),false));
-            objectArrayList.add(new Crate(3* gamePanel.tileSize, 6* gamePanel.tileSize, ImageIO.read(new File("src/Resources/Objects/crate.png")),false));
-            objectArrayList.add(new Crate(1* gamePanel.tileSize, 6* gamePanel.tileSize, ImageIO.read(new File("src/Resources/Objects/crate.png")),false));
-            objectArrayList.add(new Crate(4* gamePanel.tileSize, 6* gamePanel.tileSize, ImageIO.read(new File("src/Resources/Objects/crate.png")),false));
-            objectArrayList.add(new Crate(5* gamePanel.tileSize, 6* gamePanel.tileSize, ImageIO.read(new File("src/Resources/Objects/crate.png")),false));
+            objectArrayList.add(new Crate(3* gamePanel.tileSize, 2* gamePanel.tileSize,false));
+            objectArrayList.add(new Crate(4* gamePanel.tileSize, 3* gamePanel.tileSize,false));
+            objectArrayList.add(new Crate(4* gamePanel.tileSize, 4* gamePanel.tileSize,false));
+            objectArrayList.add(new Crate(3* gamePanel.tileSize, 6* gamePanel.tileSize,false));
+            objectArrayList.add(new Crate(1* gamePanel.tileSize, 6* gamePanel.tileSize,false));
+            objectArrayList.add(new Crate(4* gamePanel.tileSize, 6* gamePanel.tileSize,false));
+            objectArrayList.add(new Crate(5* gamePanel.tileSize, 6* gamePanel.tileSize,false));
             crateMarked = 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +41,7 @@ public class CrateModel {
     private void checkStart(){
         for(Crate crate: objectArrayList){
             if(tileModel.checkMarked(crate.getxPos(), crate.getyPos())){
-                swapImage(crate);
+                swapMarked(crate);
             }
         }
     }
@@ -56,22 +53,17 @@ public class CrateModel {
         }
         return null;
     }
-    public void swapImage(Crate crate) {
-        try {
-            if(!crate.getMarked() && tileModel.checkMarked(crate.getxPos(), crate.getyPos())){
-                crate.image = ImageIO.read(new File("src/Resources/Objects/cratemarked.png"));
-                crate.setMarked(true);
-                crateMarked++;
-                statsView.setMarkedCrates(crateMarked);
-            }
-            else if(crate.getMarked() && !tileModel.checkMarked(crate.getxPos(), crate.getyPos())){
-                crate.image = ImageIO.read(new File("src/Resources/Objects/crate.png"));
-                crate.setMarked(false);
-                crateMarked--;
-                statsView.setMarkedCrates(crateMarked);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void swapMarked(Crate crate) {
+        if(!crate.getMarked() && tileModel.checkMarked(crate.getxPos(), crate.getyPos())) {
+            crate.setMarked(true);
+            crateMarked++;
+            statsView.setMarkedCrates(crateMarked);
+        }
+
+        else if(crate.getMarked() && !tileModel.checkMarked(crate.getxPos(), crate.getyPos())) {
+            crate.setMarked(false);
+            crateMarked--;
+            statsView.setMarkedCrates(crateMarked);
         }
     }
 

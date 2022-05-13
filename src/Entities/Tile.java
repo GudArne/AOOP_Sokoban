@@ -4,12 +4,13 @@ import java.awt.image.BufferedImage;
 
 public class Tile {
     public BufferedImage tileImage;
-    public boolean collision = false;
-    public boolean marked = false;
-    
-    public Tile(BufferedImage tileImage, Boolean collision, Boolean marked)
+    public boolean collision;
+    public boolean marked;
+    public String name;
+
+    public Tile(String name, Boolean collision, Boolean marked)
     {
-        this.tileImage = tileImage;
+        this.name = name;
         this.collision = collision;
         this.marked = marked;
     }
