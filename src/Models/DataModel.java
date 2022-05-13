@@ -14,7 +14,7 @@ public class DataModel {
       Constructs a DataModel object
       @param d the data to model
    */
-   public DataModel(String direction)
+   public DataModel(String direction) // ta bort agrument
    {
       this.direction = direction;
       listeners = new ArrayList<ChangeListener>();
