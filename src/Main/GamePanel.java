@@ -4,6 +4,7 @@ import javax.swing.event.ChangeEvent;
 
 
 import Controller.KeyHandler;
+import Controller.MouseHandler;
 import Models.CrateModel;
 import Models.DataModel;
 import Models.PlayerModel;
@@ -29,6 +30,8 @@ public class GamePanel extends JPanel implements ChangeListener{
     PlayerModel playerModel;
     PlayerView playerView;
     StatsView statsView;
+    ButtonView buttonView;
+    MouseHandler mouseHandler;
 
     ScreenView screenView;
     String data = "";
@@ -38,7 +41,10 @@ public class GamePanel extends JPanel implements ChangeListener{
         this.dataModel =  new DataModel(data);
         this.dataModel.attach(this);
 
+        this.keyHandler = new KeyHandler(dataModel);
         this.statsView = new StatsView("attempts: ",stepCount);
+        this.mouseHandler = new MouseHandler(dataModel);
+        this.buttonView = new ButtonView(mouseHandler);
         this.tileView = new TileView(this);
         this.tileModel = new TileModel(this);
         this.crateModel = new CrateModel(this,tileModel, statsView);
@@ -50,7 +56,7 @@ public class GamePanel extends JPanel implements ChangeListener{
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.WHITE);
         this.setDoubleBuffered(true);
-        this.addKeyListener(new KeyHandler(dataModel));
+        this.addKeyListener(keyHandler);
         this.setFocusable(true);
     }
     // get gamePanel
@@ -64,6 +70,7 @@ public class GamePanel extends JPanel implements ChangeListener{
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
 
+        
         tileView.draw(graphics2D);
         crateView.draw(graphics2D);
         playerView.draw(graphics2D);
@@ -75,7 +82,10 @@ public class GamePanel extends JPanel implements ChangeListener{
     @Override
     public void stateChanged(ChangeEvent e) {
         playerModel.update();
-        repaint();
+        if(keyHandler.macro)
+        super.paint(getGraphics());
+        else
+            repaint();
     }
 
 }

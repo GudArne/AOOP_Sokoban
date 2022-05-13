@@ -52,37 +52,11 @@ public class DataModel {
    */
    public void update(String value)
    {
-        ChangeEvent e = new ChangeEvent(this);
+        //ChangeEvent e = new ChangeEvent(this);
         direction = value;
         for (ChangeListener l : listeners){
             l.stateChanged(new ChangeEvent(this));
         }
    }
-   public void update(ArrayList<Integer> values){
-        for (int dir : values) {
-            // wait for 500ms
 
-            switch (dir) {
-                case 38:
-                    direction = "up";
-                    update(direction);
-                    break;
-                case 40:
-                    direction = "down";
-                    update(direction);
-                    break;
-                case 37:
-                    direction = "left";
-                    update(direction);
-                    break;
-                case 39:
-                    direction = "right";
-                    update(direction);
-                    break;
-            }
-        }
-        for (ChangeListener l : listeners){
-            l.stateChanged(new ChangeEvent(this));
-        }
-    }
 }

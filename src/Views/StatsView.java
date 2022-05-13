@@ -19,21 +19,22 @@ public class StatsView extends JFrame {
 
     public StatsView(String text, int value) {
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        final Container contentPane = this.getContentPane();
-        setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+        JPanel panel = new JPanel();
 
         this.window.setTitle("Statistics");
+        JLabel info = new JLabel("Press '0' to cheat");
+        panel.add(info);
 
-        attemptsLabel.setText(text + " " + value);
-        this.window.add(attemptsLabel, BorderLayout.PAGE_START);
+        attemptsLabel.setText(text + " " + value + "      ");
+        panel.add(attemptsLabel);
 
-        stepCounterLabel.setText("Steps: " + value);
-        this.window.add(stepCounterLabel, BorderLayout.CENTER);
+        stepCounterLabel.setText("Steps: " + value+ "      ");
+        panel.add(stepCounterLabel);
 
         markedCratesLabel.setText("Marked Crates: (" + 1 + " / 7)");
-        this.window.add(markedCratesLabel, BorderLayout.PAGE_END);
+        panel.add(markedCratesLabel);
 
+        window.add(panel);
         this.window.setSize(150, 200);
         this.window.setLocation(485, 100);
         this.window.setVisible(true);
@@ -44,11 +45,11 @@ public class StatsView extends JFrame {
     public void setAttemptsLabel(String text, int value){
         this.text = text;
         this.value = value;
-        attemptsLabel.setText(text + " " + value);
+        attemptsLabel.setText(text + " " + value+ "    ");
     }
     public void setStepCounterLabel(int value){
         this.value = value;
-        stepCounterLabel.setText("Steps: " + value);
+        stepCounterLabel.setText("Steps: " + value+ "    ");
     }
     public void setMarkedCrates(int value){
         this.value = value;
