@@ -27,11 +27,7 @@ public class GameWindow {
     }
 
     public static void main(String[] args) {
-        String data = "";
-        DataModel model = new DataModel(data);
-
-        GamePanel gamePanel = new GamePanel(model);
-        model.attach(gamePanel);
+        GamePanel gamePanel = new GamePanel();
         
         GameWindow gameWindow = new GameWindow(new JFrame(), gamePanel);
 

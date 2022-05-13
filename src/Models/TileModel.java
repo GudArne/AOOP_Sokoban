@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.ArrayList;
 
-public class TileModel {
+public class TileModel { // MapModel
     GamePanel gamePanel;
     public ArrayList<ArrayList<Integer>> numTiles;
     public ArrayList<Tile> tiles;

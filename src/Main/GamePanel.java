@@ -32,11 +32,13 @@ public class GamePanel extends JPanel implements ChangeListener{
     StatsView statsView;
 
     ScreenView screenView;
+    String data = "";
 
+    public GamePanel() {
 
-    public GamePanel(DataModel dataModel) {
+        this.dataModel =  new DataModel(data);
+        this.dataModel.attach(this);
 
-        this.dataModel = dataModel;
         this.statsView = new StatsView("attempts: ",stepCount);
         this.crateModel = new CrateModel(this,tileModel, statsView);
         this.playerModel = new PlayerModel(this, dataModel,tileModel, crateModel, statsView);
