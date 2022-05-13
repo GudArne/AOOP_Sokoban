@@ -6,9 +6,7 @@ public class Tile {
     public BufferedImage tileImage;
     public boolean collision = false;
     public boolean marked = false;
-    int positionX;
-    int positionY;
-
+    
     public Tile(BufferedImage tileImage, Boolean collision, Boolean marked)
     {
         this.tileImage = tileImage;
