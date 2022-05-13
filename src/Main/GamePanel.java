@@ -22,9 +22,8 @@ public class GamePanel extends JPanel implements ChangeListener{
 
     KeyHandler keyHandler;
     DataModel dataModel;
-    TileView tileView = new TileView(this);
-    TileModel tileModel = new TileModel(this);
-
+    TileView tileView;
+    TileModel tileModel;
     CrateModel crateModel;
     CrateView crateView;
     PlayerModel playerModel;
@@ -40,6 +39,8 @@ public class GamePanel extends JPanel implements ChangeListener{
         this.dataModel.attach(this);
 
         this.statsView = new StatsView("attempts: ",stepCount);
+        this.tileView = new TileView(this);
+        this.tileModel = new TileModel(this);
         this.crateModel = new CrateModel(this,tileModel, statsView);
         this.playerModel = new PlayerModel(this, dataModel,tileModel, crateModel, statsView);
         this.playerView = new PlayerView(this,dataModel,tileModel,playerModel);

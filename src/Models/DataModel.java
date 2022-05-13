@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -8,15 +9,21 @@ import javax.swing.event.ChangeListener;
 public class DataModel {
 
     String direction;
+    ArrayList<Integer> directions;
     ArrayList<ChangeListener> listeners;
 
        /**
       Constructs a DataModel object
       @param d the data to model
    */
-   public DataModel(String direction) // ta bort agrument
+   public DataModel(String direction)
    {
       this.direction = direction;
+      listeners = new ArrayList<ChangeListener>();
+   }
+   public DataModel(ArrayList<Integer> directions)
+   {
+      this.directions = directions;
       listeners = new ArrayList<ChangeListener>();
    }
 
@@ -51,7 +58,31 @@ public class DataModel {
             l.stateChanged(new ChangeEvent(this));
         }
    }
+   public void update(ArrayList<Integer> values){
+        for (int dir : values) {
+            // wait for 500ms
 
-
-    
+            switch (dir) {
+                case 38:
+                    direction = "up";
+                    update(direction);
+                    break;
+                case 40:
+                    direction = "down";
+                    update(direction);
+                    break;
+                case 37:
+                    direction = "left";
+                    update(direction);
+                    break;
+                case 39:
+                    direction = "right";
+                    update(direction);
+                    break;
+            }
+        }
+        for (ChangeListener l : listeners){
+            l.stateChanged(new ChangeEvent(this));
+        }
+    }
 }
