@@ -1,11 +1,5 @@
 package Views;
 
-import java.awt.Container;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class StatsView extends JFrame {
@@ -22,8 +16,10 @@ public class StatsView extends JFrame {
         JPanel panel = new JPanel();
 
         this.window.setTitle("Statistics");
-        JLabel info = new JLabel("Press '0' to cheat");
-        panel.add(info);
+        JLabel info1 = new JLabel("Press '0' to cheat");
+        panel.add(info1);
+        JLabel info2 = new JLabel("Press 'Esc' to restart");
+        panel.add(info2);
 
         attemptsLabel.setText(text + " " + value + "      ");
         panel.add(attemptsLabel);

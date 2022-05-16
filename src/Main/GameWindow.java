@@ -1,12 +1,6 @@
 package Main;
 
-import java.util.ArrayList;
-
 import javax.swing.*;
-
-import Controller.KeyHandler;
-import Models.DataModel;
-import Views.StatsView;
 import Views.TileView;
 
 public class GameWindow {
@@ -14,7 +8,7 @@ public class GameWindow {
     TileView tileView ;
 
     public GameWindow(JFrame window, GamePanel gamePanel){
-        this.tileView = tileView;
+        //this.tileView = tileView;
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Sokoban");

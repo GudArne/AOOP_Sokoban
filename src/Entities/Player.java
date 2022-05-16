@@ -1,7 +1,5 @@
 package Entities;
 
-import java.awt.image.BufferedImage;
-
 public class Player {
     public int playerX,playerY;
     public Player(int playerX, int playerY){

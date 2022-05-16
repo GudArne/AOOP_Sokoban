@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import Models.DataModel;
 
 public class KeyHandler implements KeyListener {
-    public boolean up, down, left, right, anyPressed, esc, macro = false;
+    public boolean macro = false;
     DataModel dataModel;
     ArrayList<Integer> macroKeys = new ArrayList<Integer>();
     
@@ -26,42 +26,40 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        if(code == KeyEvent.VK_0) {
+        if(code == KeyEvent.VK_0) { // loop through predefined path and update data model recursively
             macro = true;
-            KeyEvent keyEvent = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), e.getModifiers(), e.getKeyCode(), e.getKeyChar());
+            // Create a new KeyEvent to simulate the key press
+            KeyEvent keyEvent = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), e.getModifiersEx(), e.getKeyCode(), e.getKeyChar());
             
             for (Integer key : macroKeys) {
-                // wait 100 ms
+                // wait 150 ms
                 try {
                     Thread.sleep(150);
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
+                // manipulate the key event
                 keyEvent.setKeyCode(key);
+                // send the KeyEvent to the key listener
                 keyPressed(keyEvent);
             }
             macro = false;
             System.out.println("Macro done");
         }
 
-        if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
-            //up = true; anyPressed = true;
+        if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP)
             dataModel.update("up");
-        }
-        if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) {
-            //left = true; anyPressed = true;
+
+        if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT)
             dataModel.update("left");
-        }
-        if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
-            //down = true; anyPressed = true;
+
+        if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN)
             dataModel.update("down");
-        }
-        if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
-            //right = true; anyPressed = true;
+
+        if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT)
             dataModel.update("right");
-        }
+            
         if(code == KeyEvent.VK_ESCAPE){
-            //esc = true;
             dataModel.update("esc");
             System.out.println("Game restarted");
         }
@@ -69,10 +67,7 @@ public class KeyHandler implements KeyListener {
     
     String direction;
     public void update(ArrayList<Integer> values){
-        
         for (int dir : values) {
-            // wait for 500ms
-
             switch (dir) {
                 case 38:
                     direction = "up";
@@ -93,6 +88,7 @@ public class KeyHandler implements KeyListener {
             }
         }
     }
+
     @Override
     public void keyReleased(KeyEvent e) {
 

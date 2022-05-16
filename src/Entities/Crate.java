@@ -1,7 +1,5 @@
 package Entities;
 
-import java.awt.image.BufferedImage;
-
 public class Crate {
     public int xPos;
     public int yPos;

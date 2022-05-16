@@ -1,6 +1,5 @@
 package Controller;
 
-import java.awt.*;
 import java.awt.event.*;
 
 import Models.DataModel;
@@ -16,18 +15,17 @@ public class MouseHandler implements ActionListener {
         String code = e.getActionCommand();
         System.out.println("Mouse clicked");
 
-        if(code.equals("up")) {
+        if(code.equals("up"))
             dataModel.update("up");
-        }
-        if(code.equals("left")) {
+
+        if(code.equals("left"))
             dataModel.update("left");
-        }
-        if(code.equals("down")) {
+
+        if(code.equals("down"))
             dataModel.update("down");
-        }
-        if(code.equals("right")) {
+            
+        if(code.equals("right"))
             dataModel.update("right");
-        }
         
     }
 }

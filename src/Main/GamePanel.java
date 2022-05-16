@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements ChangeListener{
     public final int tileSize = 48;
     public final int screenWidth = tileSize * 8;
     public final int screenHeight = tileSize * 9;
-    private int attempts, stepCount = 0;
+    private int stepCount = 0;
 
     KeyHandler keyHandler;
     DataModel dataModel;
@@ -65,6 +65,14 @@ public class GamePanel extends JPanel implements ChangeListener{
     }
     public DataModel getDataModel(){
         return dataModel;
+    }
+    // get playerModel
+    public PlayerModel getPlayerModel(){
+        return playerModel;
+    }
+    // get crateModel
+    public CrateModel getCrateModel(){
+        return crateModel;
     }
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);

@@ -1,7 +1,5 @@
 package Views;
 
-import Controller.KeyHandler;
-import Entities.Player;
 import Main.GamePanel;
 import Models.DataModel;
 import Models.PlayerModel;

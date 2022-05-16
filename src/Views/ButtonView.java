@@ -1,6 +1,5 @@
 package Views;
 
-import java.awt.Container;
 import javax.swing.*;
 
 import Controller.MouseHandler;

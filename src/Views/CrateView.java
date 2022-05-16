@@ -3,7 +3,6 @@ package Views;
 import Main.GamePanel;
 import Models.CrateModel;
 import Models.DataModel;
-import Models.TileModel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
