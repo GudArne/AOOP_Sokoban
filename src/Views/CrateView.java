@@ -13,10 +13,14 @@ public class CrateView{
     CrateModel crateModel;
     GamePanel gamePanel;
     DataModel dataModel;
+
+    // Constructs a CrateView object
     public CrateView(GamePanel gamePanel, CrateModel crateModel) {
         this.crateModel = crateModel;
         this.gamePanel = gamePanel;
     }
+
+    // Returns the image of the crate
     public BufferedImage getImage(boolean marked){
         BufferedImage image;
         try {
@@ -31,7 +35,8 @@ public class CrateView{
         }
     }
 
-    public void draw(Graphics2D graphics2D) { //view
+    // Draw the view
+    public void draw(Graphics2D graphics2D) {
         for(int i = 0; i < crateModel.objectArrayList.size(); i++){
             graphics2D.drawImage(getImage(crateModel.getObjectArrayList().get(i).marked),crateModel.getObjectArrayList().get(i).xPos,crateModel.getObjectArrayList().get(i).yPos,gamePanel.tileSize, gamePanel.tileSize,null);
         }

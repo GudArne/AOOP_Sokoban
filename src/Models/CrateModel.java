@@ -54,6 +54,7 @@ public class CrateModel {
         }
         return null;
     }
+    // Swaps the the marked and unmarked crates
     public void swapMarked(Crate crate) {
         if(!crate.getMarked() && tileModel.checkMarked(crate.getxPos(), crate.getyPos())) {
             crate.setMarked(true);
@@ -68,6 +69,7 @@ public class CrateModel {
         }
     }
 
+    // Checks if all the crates are marked
     public boolean checkIfWon(){
         for(int i = 0; i < objectArrayList.size(); i++){
             if(!objectArrayList.get(i).marked)
@@ -75,6 +77,7 @@ public class CrateModel {
         }
         return true;
     }
+    // Checks if the crate will collide in a speicific direction
     public boolean checkCrateCollision(String s, int x, int y){
         switch (s){
             case "up" -> {
@@ -103,6 +106,7 @@ public class CrateModel {
         }
         return false;
     }
+    // Moves the crate in a specific direction
     public void moveCrate(Crate crate, String direction){
         switch (direction){
             case "up" -> crate.setyPos(crate.yPos - gamePanel.tileSize);
@@ -111,9 +115,11 @@ public class CrateModel {
             case "right" -> crate.setxPos(crate.xPos + gamePanel.tileSize);
         }
     }
+    // returns the objectArrayList (ArrayList of crates)
     public ArrayList<Crate> getObjectArrayList() {
         return objectArrayList;
     }
+    // resets the position of the crates
     public void setRestart(){
         objectArrayList.clear();
         setObjects();

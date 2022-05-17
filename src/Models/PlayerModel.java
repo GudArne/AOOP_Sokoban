@@ -9,18 +9,18 @@ import java.util.Objects;
 
 import Views.StatsView;
 public class PlayerModel {
+    private int stepCount = 0;
+    private int attempts = 0;
+
     GamePanel gamePanel;
     DataModel dataModel;
     TileModel tileModel;
-
     CrateModel crateModel;
     BufferedImage playerImage;
-    private int stepCount = 0;
-    private int attempts = 0;
     StatsView statsView;
-
-
     Player player;
+
+    // Constructs a player model object
     public PlayerModel(GamePanel gamePanel, DataModel dataModel, TileModel tileModel, CrateModel crateModel, StatsView statsView) {
         this.gamePanel = gamePanel;
         this.dataModel = dataModel;
@@ -31,13 +31,16 @@ public class PlayerModel {
         player = new Player(gamePanel.tileSize, 2 * gamePanel.tileSize);
     }
 
+    // Updates the player position and validates if its a correct move.
+    // Also updates the step count and attempts.
+    // Also updates the crates and validates if its a correct move.
     public void update(){
         String direction = dataModel.getData();
         if(!crateModel.checkIfWon()) {
             if (Objects.equals(direction, "up") && checkCollision(direction)) {
                 Crate crate = crateModel.getCrate(getX(), checkNext(direction));
                 if (crate == null) {
-                    updatePlayer(direction);
+                    updatePlayer(direction); //move player
                     setStepCount(getStepCount() + 1);
                     statsView.setStepCounterLabel(getStepCount());
                 } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
@@ -50,7 +53,7 @@ public class PlayerModel {
             } else if (Objects.equals(direction, "down") && checkCollision(direction)) {
                 Crate crate = crateModel.getCrate(getX(), checkNext(direction));
                 if (crate == null) {
-                    updatePlayer(direction);
+                    updatePlayer(direction); //move player
                     setStepCount(getStepCount() + 1);
                     statsView.setStepCounterLabel(getStepCount());
                 } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.yPos)) {
@@ -88,11 +91,12 @@ public class PlayerModel {
                 }
             }
         }
-        if (Objects.equals(direction, "esc")) {
+        if (Objects.equals(direction, "esc")) { // Restarts the game if the user presses esc
             setRestart();
             crateModel.setRestart();
         }
     }
+    // Checks if there will be a collision with the player. 
     private boolean checkCollision(String direction){
         switch (direction){
             case "up" ->{
@@ -115,13 +119,16 @@ public class PlayerModel {
         return false;
     }
 
+    // get player X position
     public int getX(){
         return player.getPlayerX();
     }
+    // get player Y position
     public int getY(){
         return player.getPlayerY();
     }
 
+    // Returns the next position of the player
     public int checkNext(String direction){
         int retInt = 0;
         switch (direction){
@@ -133,9 +140,12 @@ public class PlayerModel {
         return retInt;
     }
 
+    // Returns the player icon/image
     public BufferedImage getPlayerImage() {
         return playerImage;
     }
+
+    // Resets game statistics and positions of crates and player
     private void setRestart(){
         if(crateModel.checkIfWon()){
             setAttempts(0);
@@ -151,18 +161,28 @@ public class PlayerModel {
         player.setPlayerY(2 * gamePanel.tileSize);
 
     }
+
+    // get player step count
     public int getStepCount(){
         return stepCount;
     }
+
+    // set player step count
     public void setStepCount(int stepCount){
         this.stepCount = stepCount;
     }
+
+    // get player attempts
     public int getAttempts(){
         return attempts;
     }
+
+    // set player attempts
     public void setAttempts(int attempts){
         this.attempts = attempts;
     }
+
+    // Updates the player position
     public void updatePlayer(String direction){
         switch (direction){
             case "up" -> player.setPlayerY(getY() - gamePanel.tileSize);

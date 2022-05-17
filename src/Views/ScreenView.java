@@ -12,13 +12,16 @@ public class ScreenView {
 
     CrateModel crateModel;
     GamePanel gamePanel;
-
     BufferedImage image;
+
+    // Constructs a ScreenView object
     public ScreenView(GamePanel gamePanel, CrateModel crateModel) {
         this.crateModel = crateModel;
         this.gamePanel = gamePanel;
         setImage();
     }
+
+    // set the "winner" image on the screen
     private void setImage(){
         try{
             image = ImageIO.read(new File("src/Resources/Screen/Winner.jpeg"));
@@ -26,6 +29,8 @@ public class ScreenView {
             throw new RuntimeException(e);
         }
     }
+
+    // Draw the view
     public void draw(Graphics2D graphics2D){
         if (crateModel.checkIfWon())
         {

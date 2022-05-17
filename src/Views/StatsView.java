@@ -11,6 +11,7 @@ public class StatsView extends JFrame {
     JLabel markedCratesLabel = new JLabel();
     JFrame window =  new JFrame();
 
+    // Constructs a StatsView object
     public StatsView(String text, int value) {
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
@@ -35,18 +36,26 @@ public class StatsView extends JFrame {
         this.window.setLocation(485, 100);
         this.window.setVisible(true);
     }
+
+    // Returns the game panel
     public StatsView getGamePanel(){
         return this;
     }
+
+    // Updates the attempts counter
     public void setAttemptsLabel(String text, int value){
         this.text = text;
         this.value = value;
         attemptsLabel.setText(text + " " + value+ "    ");
     }
+
+    // Updates the step counter
     public void setStepCounterLabel(int value){
         this.value = value;
         stepCounterLabel.setText("Steps: " + value+ "    ");
     }
+
+    // Updates the marked crates counter
     public void setMarkedCrates(int value){
         this.value = value;
         markedCratesLabel.setText("Marked Crates: (" + value + " / 7)");

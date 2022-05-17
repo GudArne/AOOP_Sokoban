@@ -10,6 +10,7 @@ public class TileModel { // MapModel
     public ArrayList<ArrayList<Integer>> numTiles;
     public ArrayList<Tile> tiles;
 
+    // Constructs a tile model
     public TileModel(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         numTiles = new ArrayList<>();
@@ -18,15 +19,20 @@ public class TileModel { // MapModel
         readTile();
         readMap("src/Resources/Map/map1.txt");
     }
+
+    // Adds the tiles to the tiles arraylist
     private void readTile() {
         tiles.add(new Tile("blank", false,false));
         tiles.add(new Tile("blankmarked", false,true));
         tiles.add(new Tile("wall", true,false));
 
     }
+    // returns the game panel
     public GamePanel getGamePanel(){
         return this.gamePanel;
     }
+
+    // Reads the map and convert it to a 2d array
     private void readMap(String map) {
 
         int index = 0;
@@ -52,7 +58,7 @@ public class TileModel { // MapModel
         }
     }
 
-
+    // Checks if a crate is marked or not
     public boolean checkMarked(int x, int y){
         x = x/ gamePanel.tileSize;
         y = y/ gamePanel.tileSize;
@@ -61,6 +67,7 @@ public class TileModel { // MapModel
         else return false;
     }
 
+    // Get the tile at a specific position
     public int getTile(int x, int y)
     {
         x = x/gamePanel.tileSize;

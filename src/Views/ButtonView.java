@@ -9,6 +9,7 @@ public class ButtonView extends JFrame{
     JFrame window =  new JFrame();
     Handler mouseHandler;
 
+    // Constructs a ButtonView object
     public ButtonView(Handler mouseHandler) {
         this.mouseHandler = mouseHandler;
         JPanel panel = new JPanel();

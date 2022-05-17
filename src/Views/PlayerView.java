@@ -11,14 +11,17 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class PlayerView {
-  GamePanel gamePanel;
-  DataModel dataModel;
-  PlayerModel playerModel;
+    GamePanel gamePanel;
+    DataModel dataModel;
+    PlayerModel playerModel;
+
+    // Constructs a PlayerView object
     public PlayerView(GamePanel gamePanel, DataModel dataModel,TileModel tileModel, PlayerModel playerModel){
         this.gamePanel = gamePanel;
         this.dataModel = dataModel;
         this.playerModel = playerModel;
     }
+    // Gets the image of the player
     private BufferedImage getImage(){
         BufferedImage image;
         try {
@@ -30,6 +33,7 @@ public class PlayerView {
         return null;
     }
 
+    // Draw the view
     public void draw(Graphics2D graphics2D){
         graphics2D.drawImage(getImage(),playerModel.getX(),playerModel.getY(), gamePanel.tileSize,gamePanel.tileSize,null);
     }

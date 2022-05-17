@@ -13,7 +13,7 @@ public abstract class Handler implements ActionListener, KeyListener {
         this.dataModel = dataModel;
     }
 
-    // Updated the data model with a event change
+    // Updates the data model with a event change
     public void moveUp(){
         dataModel.update("up");
     }
@@ -29,5 +29,4 @@ public abstract class Handler implements ActionListener, KeyListener {
     public void restart(){
         dataModel.update("esc");
     }
-    
 }
