@@ -4,11 +4,10 @@ import java.awt.event.*;
 
 import Models.DataModel;
 
-public class MouseHandler implements ActionListener {
+public class MouseHandler extends Handler {
 
-    private DataModel dataModel;
     public MouseHandler(DataModel dataModel) {
-        this.dataModel = dataModel;
+        super(dataModel);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -16,16 +15,31 @@ public class MouseHandler implements ActionListener {
         System.out.println("Mouse clicked");
 
         if(code.equals("up"))
-            dataModel.update("up");
+            moveUp();
 
         if(code.equals("left"))
-            dataModel.update("left");
+            moveLeft();
 
         if(code.equals("down"))
-            dataModel.update("down");
-            
+            moveDown();
+
         if(code.equals("right"))
-            dataModel.update("right");
+            moveRight();
+        
+    }
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // TODO Auto-generated method stub
         
     }
 }

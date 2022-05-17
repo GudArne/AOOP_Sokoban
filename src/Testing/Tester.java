@@ -53,7 +53,6 @@ public class Tester {
     @Test public void MoveCrate(){
         // get closest crate
         Crate crate = crateModel.getCrate(48*3, 48*2);
-
         // Player should be able to move right and move the crate
         dataModel.update("right");
         dataModel.update("right");

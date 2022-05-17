@@ -1,6 +1,9 @@
 package Main;
 
 import javax.swing.*;
+
+import Controller.KeyHandler;
+import Controller.MouseHandler;
 import Views.TileView;
 
 public class GameWindow {
@@ -8,7 +11,6 @@ public class GameWindow {
     TileView tileView ;
 
     public GameWindow(JFrame window, GamePanel gamePanel){
-        //this.tileView = tileView;
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Sokoban");
@@ -21,9 +23,11 @@ public class GameWindow {
     }
 
     public static void main(String[] args) {
-        GamePanel gamePanel = new GamePanel();
+        GamePanel gamePanel = new GamePanel(); 
+
+        //gamePanel.setController(new MouseHandler(gamePanel.getDataModel()));
+        gamePanel.setController(new KeyHandler(gamePanel.getDataModel()));
         
         GameWindow gameWindow = new GameWindow(new JFrame(), gamePanel);
-
     }
 }

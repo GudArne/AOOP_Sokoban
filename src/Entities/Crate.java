@@ -11,6 +11,7 @@ public class Crate {
         this.marked = marked;
     }
 
+    // Getters and setters.
     public void setxPos(int xPos) {
         this.xPos = xPos;
     }

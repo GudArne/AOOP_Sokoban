@@ -12,7 +12,6 @@ public class CrateModel {
     public TileModel tileModel;
     private int crateMarked = 0;
     StatsView statsView;
-    //TODO get funktioner
 
     public CrateModel(GamePanel gamePanel, TileModel tileModel, StatsView statsView) {
         this.gamePanel = gamePanel;
@@ -23,8 +22,8 @@ public class CrateModel {
         checkStart();
     }
 
-
-    private void setObjects(){ // Sets the crates in the game
+    // Sets the crates in the game
+    private void setObjects(){ 
         try {
             objectArrayList.add(new Crate(3* gamePanel.tileSize, 2* gamePanel.tileSize,false));
             objectArrayList.add(new Crate(4* gamePanel.tileSize, 3* gamePanel.tileSize,false));
@@ -38,6 +37,7 @@ public class CrateModel {
             e.printStackTrace();
         }
     }
+    // Checks if the crates stands on a marked tile in the beginning of the game
     private void checkStart(){
         for(Crate crate: objectArrayList){
             if(tileModel.checkMarked(crate.getxPos(), crate.getyPos())){
@@ -45,6 +45,7 @@ public class CrateModel {
             }
         }
     }
+    // returns a crate object
     public Crate getCrate(int x, int y){
         for(int i = 0; i<objectArrayList.size();i++)
         {

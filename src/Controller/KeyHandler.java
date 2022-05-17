@@ -1,19 +1,17 @@
 package Controller;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import Models.DataModel;
 
-public class KeyHandler implements KeyListener {
-    public boolean macro = false;
+public class KeyHandler extends Handler {
     DataModel dataModel;
     ArrayList<Integer> macroKeys = new ArrayList<Integer>();
-    
 
     public KeyHandler(DataModel dataModel) {
-        this.dataModel = dataModel;
+        super(dataModel);
         setPredefinedPath(macroKeys);
     }
 
@@ -22,12 +20,14 @@ public class KeyHandler implements KeyListener {
 
     }
     
+    // Triggers the update to the data model via handler
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
         if(code == KeyEvent.VK_0) { // loop through predefined path and update data model recursively
             macro = true;
+            System.out.println("Macro true");
             // Create a new KeyEvent to simulate the key press
             KeyEvent keyEvent = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), e.getModifiersEx(), e.getKeyCode(), e.getKeyChar());
             
@@ -44,48 +44,24 @@ public class KeyHandler implements KeyListener {
                 keyPressed(keyEvent);
             }
             macro = false;
-            System.out.println("Macro done");
+            System.out.println("Macro false");
         }
 
         if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP)
-            dataModel.update("up");
+            moveUp();    
 
         if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT)
-            dataModel.update("left");
+            moveLeft();
 
         if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN)
-            dataModel.update("down");
+            moveDown();
+            
 
         if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT)
-            dataModel.update("right");
-            
+            moveRight();
+
         if(code == KeyEvent.VK_ESCAPE){
-            dataModel.update("esc");
-            System.out.println("Game restarted");
-        }
-    }
-    
-    String direction;
-    public void update(ArrayList<Integer> values){
-        for (int dir : values) {
-            switch (dir) {
-                case 38:
-                    direction = "up";
-                    dataModel.update(direction);
-                    break;
-                case 40:
-                    direction = "down";
-                    dataModel.update(direction);
-                    break;
-                case 37:
-                    direction = "left";
-                    dataModel.update(direction);
-                    break;
-                case 39:
-                    direction = "right";
-                    dataModel.update(direction);
-                    break;
-            }
+            restart();
         }
     }
 
@@ -94,6 +70,7 @@ public class KeyHandler implements KeyListener {
 
     }
 
+    // sets the predifined path for auto completion
     public void setPredefinedPath(ArrayList<Integer> macroKeys){
         this.macroKeys = macroKeys;
         macroKeys.add(KeyEvent.VK_ESCAPE);
@@ -133,5 +110,11 @@ public class KeyHandler implements KeyListener {
         macroKeys.add(KeyEvent.VK_DOWN);
         macroKeys.add(KeyEvent.VK_RIGHT);
         macroKeys.add(KeyEvent.VK_RIGHT);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        
     }
 }

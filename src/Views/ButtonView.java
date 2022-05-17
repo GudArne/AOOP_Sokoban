@@ -2,14 +2,14 @@ package Views;
 
 import javax.swing.*;
 
-import Controller.MouseHandler;
+import Controller.Handler;
 
 public class ButtonView extends JFrame{
 
     JFrame window =  new JFrame();
-    MouseHandler mouseHandler;
+    Handler mouseHandler;
 
-    public ButtonView(MouseHandler mouseHandler) {
+    public ButtonView(Handler mouseHandler) {
         this.mouseHandler = mouseHandler;
         JPanel panel = new JPanel();
         JButton up = new JButton("up");

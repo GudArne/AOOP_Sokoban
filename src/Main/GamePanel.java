@@ -2,7 +2,7 @@ package Main;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
-
+import Controller.Handler;
 import Controller.KeyHandler;
 import Controller.MouseHandler;
 import Models.CrateModel;
@@ -35,16 +35,12 @@ public class GamePanel extends JPanel implements ChangeListener{
 
     ScreenView screenView;
     String data = "";
+    Handler handler;
 
     public GamePanel() {
-
         this.dataModel =  new DataModel(data);
         this.dataModel.attach(this);
-
-        this.keyHandler = new KeyHandler(dataModel);
         this.statsView = new StatsView("attempts: ",stepCount);
-        this.mouseHandler = new MouseHandler(dataModel);
-        this.buttonView = new ButtonView(mouseHandler);
         this.tileView = new TileView(this);
         this.tileModel = new TileModel(this);
         this.crateModel = new CrateModel(this,tileModel, statsView);
@@ -56,8 +52,24 @@ public class GamePanel extends JPanel implements ChangeListener{
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.WHITE);
         this.setDoubleBuffered(true);
-        this.addKeyListener(keyHandler);
+        //this.addKeyListener(keyHandler);
         this.setFocusable(true);
+    }
+    
+    // sets which controller to use
+    public void setController(Handler handler){
+        this.handler = handler;
+        if(handler.getClass() == MouseHandler.class)
+        {
+            this.mouseHandler = new MouseHandler(dataModel);
+            this.buttonView = new ButtonView(handler);
+        }
+        else if(handler.getClass() == KeyHandler.class)
+        {
+            this.keyHandler = new KeyHandler(dataModel);
+            this.addKeyListener(handler);
+        }
+
     }
     // get gamePanel
     public GamePanel getGamePanel(){
@@ -74,24 +86,26 @@ public class GamePanel extends JPanel implements ChangeListener{
     public CrateModel getCrateModel(){
         return crateModel;
     }
+    // repaint the views
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
 
-        
         tileView.draw(graphics2D);
         crateView.draw(graphics2D);
         playerView.draw(graphics2D);
         screenView.draw(graphics2D);
-
         graphics2D.dispose();
     }
 
+    // Invoked when a controller triggers a change event.
     @Override
     public void stateChanged(ChangeEvent e) {
         playerModel.update();
-        if(keyHandler.macro)
-        super.paint(getGraphics());
+        // If the auto complete button is pressed, the super method needs to be called. 
+        // Otherwise, the game will not be updated visually for the user.
+        if(handler.macro)
+            super.paint(getGraphics());
         else
             repaint();
     }
