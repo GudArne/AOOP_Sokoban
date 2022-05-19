@@ -12,7 +12,6 @@ public class MouseHandler extends Handler {
     @Override
     public void actionPerformed(ActionEvent e) {
         String code = e.getActionCommand();
-        System.out.println("Mouse clicked");
 
         if(code.equals("up"))
             moveUp();
@@ -25,6 +24,9 @@ public class MouseHandler extends Handler {
 
         if(code.equals("right"))
             moveRight();
+
+        if(code.equals("restart"))
+            restart();
         
     }
     @Override

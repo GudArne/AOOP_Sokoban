@@ -52,10 +52,9 @@ public class GamePanel extends JPanel implements ChangeListener{
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.WHITE);
         this.setDoubleBuffered(true);
-        //this.addKeyListener(keyHandler);
         this.setFocusable(true);
     }
-    
+
     // sets which controller to use
     public void setController(Handler handler){
         this.handler = handler;

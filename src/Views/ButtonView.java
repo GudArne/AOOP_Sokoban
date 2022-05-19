@@ -17,15 +17,18 @@ public class ButtonView extends JFrame{
         JButton down = new JButton("down");
         JButton left = new JButton("left");
         JButton right = new JButton("right");
+        JButton restart = new JButton("restart");
         up.addActionListener(mouseHandler);
         down.addActionListener(mouseHandler);
         left.addActionListener(mouseHandler);
         right.addActionListener(mouseHandler);
+        restart.addActionListener(mouseHandler);
 
         panel.add(up);
         panel.add(down);
         panel.add(left);
         panel.add(right);
+        panel.add(restart);
 
         window.add(panel);
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
