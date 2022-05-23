@@ -7,7 +7,7 @@ import Models.DataModel;
 public abstract class Handler implements ActionListener, KeyListener {
 
     private DataModel dataModel;
-    public boolean macro = false;
+    private boolean macro = false;
 
     public Handler(DataModel dataModel) {
         this.dataModel = dataModel;
@@ -28,5 +28,12 @@ public abstract class Handler implements ActionListener, KeyListener {
     }
     public void restart(){
         dataModel.update("esc");
+    }
+
+    public boolean getMacro(){
+        return macro;
+    }
+    public void setMacro(boolean macro){
+        this.macro = macro;
     }
 }

@@ -10,9 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class CrateView{
-    CrateModel crateModel;
-    GamePanel gamePanel;
-    DataModel dataModel;
+    private CrateModel crateModel;
+    private GamePanel gamePanel;
 
     // Constructs a CrateView object
     public CrateView(GamePanel gamePanel, CrateModel crateModel) {
@@ -37,8 +36,8 @@ public class CrateView{
 
     // Draw the view
     public void draw(Graphics2D graphics2D) {
-        for(int i = 0; i < crateModel.objectArrayList.size(); i++){
-            graphics2D.drawImage(getImage(crateModel.getObjectArrayList().get(i).marked),crateModel.getObjectArrayList().get(i).xPos,crateModel.getObjectArrayList().get(i).yPos,gamePanel.tileSize, gamePanel.tileSize,null);
+        for(int i = 0; i < crateModel.getCrates().size(); i++){
+            graphics2D.drawImage(getImage(crateModel.getCrates().get(i).isMarked()),crateModel.getCrates().get(i).getxPos(),crateModel.getCrates().get(i).getyPos(),gamePanel.tileSize, gamePanel.tileSize,null);
         }
     }
 }

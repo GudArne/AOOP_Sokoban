@@ -48,13 +48,13 @@ public class TileView extends TileModel {
         int xPos = 0;
         GamePanel gamePanel = getGamePanel();
 
-        while(firstArray < numTiles.size()){
-            BufferedImage image = getImage(tiles.get(numTiles.get(firstArray).get(secondArray)).name);
+        while(firstArray < getNumTiles().size()){
+            BufferedImage image = getImage(getTiles().get(getNumTiles().get(firstArray).get(secondArray)).getName());
             graphics2D.drawImage(image,xPos,yPos,gamePanel.tileSize ,gamePanel.tileSize,null);
             xPos += gamePanel.tileSize;
             secondArray++;
 
-            if(secondArray == numTiles.get(firstArray).size()){
+            if(secondArray == getNumTiles().get(firstArray).size()){
                 secondArray = 0;
                 xPos = 0;
 

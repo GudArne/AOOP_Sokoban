@@ -60,7 +60,7 @@ public class Tester {
         assertEquals(48*3, playerModel.getX());
         assertEquals(48*2, playerModel.getY());
         // crate should be moved one tile to the right
-        assertEquals(crate.xPos, 48*4); 
+        assertEquals(crate.getxPos(), 48*4); 
     }
 
 
@@ -76,12 +76,12 @@ public class Tester {
         assertEquals(48*4, playerModel.getX());
         assertEquals(48*2, playerModel.getY());
         // crate should be moved one tile to the right
-        assertEquals(crate.xPos, 48*5);
+        assertEquals(crate.getxPos(), 48*5);
 
         // Try to move crate through the wall. Should not be able to move
         dataModel.update("right");
         assertEquals(48*4, playerModel.getX());
-        assertEquals(crate.xPos, 48*5);
+        assertEquals(crate.getxPos(), 48*5);
     }
 
     // Move a crate to a crate
@@ -98,9 +98,9 @@ public class Tester {
 
         // Try to move crate crate1 to crate2. Should not work.
         dataModel.update("down");
-        assertEquals(crate1.xPos, 48*4);
-        assertEquals(crate1.yPos, 48*2);
-        assertEquals(crate2.xPos, 48*4);
-        assertEquals(crate2.yPos, 48*3);
+        assertEquals(crate1.getxPos(), 48*4);
+        assertEquals(crate1.getyPos(), 48*2);
+        assertEquals(crate2.getxPos(), 48*4);
+        assertEquals(crate2.getyPos(), 48*3);
     }
 }

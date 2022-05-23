@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import Models.DataModel;
 
 public class KeyHandler extends Handler {
-    DataModel dataModel;
-    ArrayList<Integer> macroKeys = new ArrayList<Integer>();
+    private DataModel dataModel;
+    private ArrayList<Integer> macroKeys = new ArrayList<Integer>();
 
     public KeyHandler(DataModel dataModel) {
         super(dataModel);
@@ -26,7 +26,7 @@ public class KeyHandler extends Handler {
         int code = e.getKeyCode();
 
         if(code == KeyEvent.VK_0) { // loop through predefined path and update data model recursively
-            macro = true;
+            setMacro(true);
             System.out.println("Macro true");
             // Create a new KeyEvent to simulate the key press
             KeyEvent keyEvent = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), e.getModifiersEx(), e.getKeyCode(), e.getKeyChar());
@@ -43,7 +43,7 @@ public class KeyHandler extends Handler {
                 // send the KeyEvent to the key listener
                 keyPressed(keyEvent);
             }
-            macro = false;
+            setMacro(false);
             System.out.println("Macro false");
         }
 
@@ -71,7 +71,7 @@ public class KeyHandler extends Handler {
     }
 
     // sets the predifined path for auto completion
-    public void setPredefinedPath(ArrayList<Integer> macroKeys){
+    private void setPredefinedPath(ArrayList<Integer> macroKeys){
         this.macroKeys = macroKeys;
         macroKeys.add(KeyEvent.VK_ESCAPE);
         macroKeys.add(KeyEvent.VK_RIGHT);

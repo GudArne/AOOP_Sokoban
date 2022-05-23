@@ -6,8 +6,8 @@ import Controller.Handler;
 
 public class ButtonView extends JFrame{
 
-    JFrame window =  new JFrame();
-    Handler mouseHandler;
+    private JFrame window =  new JFrame();
+    private Handler mouseHandler;
 
     // Constructs a ButtonView object
     public ButtonView(Handler mouseHandler) {

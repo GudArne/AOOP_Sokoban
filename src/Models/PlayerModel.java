@@ -12,13 +12,13 @@ public class PlayerModel {
     private int stepCount = 0;
     private int attempts = 0;
 
-    GamePanel gamePanel;
-    DataModel dataModel;
-    TileModel tileModel;
-    CrateModel crateModel;
-    BufferedImage playerImage;
-    StatsView statsView;
-    Player player;
+    private GamePanel gamePanel;
+    private DataModel dataModel;
+    private TileModel tileModel;
+    private CrateModel crateModel;
+    //private BufferedImage playerImage;
+    private StatsView statsView;
+    private Player player;
 
     // Constructs a player model object
     public PlayerModel(GamePanel gamePanel, DataModel dataModel, TileModel tileModel, CrateModel crateModel, StatsView statsView) {
@@ -56,7 +56,7 @@ public class PlayerModel {
                     updatePlayer(direction); //move player
                     setStepCount(getStepCount() + 1);
                     statsView.setStepCounterLabel(getStepCount());
-                } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.yPos)) {
+                } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
                     crateModel.moveCrate(crate, direction);
                     crateModel.swapMarked(crate);
                     updatePlayer(direction);
@@ -100,49 +100,35 @@ public class PlayerModel {
     private boolean checkCollision(String direction){
         switch (direction){
             case "up" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(player.playerX, player.playerY - gamePanel.tileSize)).collision)
+                if(!tileModel.getTiles().get(tileModel.getTile(player.getPlayerX(), player.getPlayerY() - gamePanel.tileSize)).getCollision())
                     return true;
             }
             case "down" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(player.playerX, player.playerY + gamePanel.tileSize)).collision)
+                if(!tileModel.getTiles().get(tileModel.getTile(player.getPlayerX(), player.getPlayerY() + gamePanel.tileSize)).getCollision())
                     return true;
             }
             case "left" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(player.playerX - gamePanel.tileSize, player.playerY)).collision)
+                if(!tileModel.getTiles().get(tileModel.getTile(player.getPlayerX() - gamePanel.tileSize, player.getPlayerY())).getCollision())
                     return true;
             }
             case "right" ->{
-                if(!tileModel.tiles.get(tileModel.getTile(player.playerX + gamePanel.tileSize, player.playerY)).collision)
+                if(!tileModel.getTiles().get(tileModel.getTile(player.getPlayerX() + gamePanel.tileSize, player.getPlayerY())).getCollision())
                     return true;
             }
         }
         return false;
     }
 
-    // get player X position
-    public int getX(){
-        return player.getPlayerX();
-    }
-    // get player Y position
-    public int getY(){
-        return player.getPlayerY();
-    }
-
     // Returns the next position of the player
     public int checkNext(String direction){
         int retInt = 0;
         switch (direction){
-            case "up" -> retInt = player.playerY - gamePanel.tileSize;
-            case "down" ->retInt = player.playerY + gamePanel.tileSize;
-            case "left" -> retInt = player.playerX - gamePanel.tileSize;
-            case "right" -> retInt = player.playerX + gamePanel.tileSize;
+            case "up" -> retInt = player.getPlayerY() - gamePanel.tileSize;
+            case "down" ->retInt = player.getPlayerY() + gamePanel.tileSize;
+            case "left" -> retInt = player.getPlayerX() - gamePanel.tileSize;
+            case "right" -> retInt = player.getPlayerX() + gamePanel.tileSize;
         }
         return retInt;
-    }
-
-    // Returns the player icon/image
-    public BufferedImage getPlayerImage() {
-        return playerImage;
     }
 
     // Resets game statistics and positions of crates and player
@@ -160,6 +146,26 @@ public class PlayerModel {
         player.setPlayerX(gamePanel.tileSize);
         player.setPlayerY(2 * gamePanel.tileSize);
 
+    }
+
+    // Updates the player position
+    private void updatePlayer(String direction){
+        switch (direction){
+            case "up" -> player.setPlayerY(getY() - gamePanel.tileSize);
+            case "down" -> player.setPlayerY(getY() + gamePanel.tileSize);
+            case "left" -> player.setPlayerX(getX() - gamePanel.tileSize);
+            case "right" -> player.setPlayerX(getX() + gamePanel.tileSize);
+        }
+    }
+
+    // get player X position
+    public int getX(){
+        return player.getPlayerX();
+    }
+
+    // get player Y position
+    public int getY(){
+        return player.getPlayerY();
     }
 
     // get player step count
@@ -180,15 +186,5 @@ public class PlayerModel {
     // set player attempts
     public void setAttempts(int attempts){
         this.attempts = attempts;
-    }
-
-    // Updates the player position
-    public void updatePlayer(String direction){
-        switch (direction){
-            case "up" -> player.setPlayerY(getY() - gamePanel.tileSize);
-            case "down" -> player.setPlayerY(getY() + gamePanel.tileSize);
-            case "left" -> player.setPlayerX(getX() - gamePanel.tileSize);
-            case "right" -> player.setPlayerX(getX() + gamePanel.tileSize);
-        }
     }
 }

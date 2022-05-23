@@ -1,9 +1,9 @@
 package Entities;
 
 public class Crate {
-    public int xPos;
-    public int yPos;
-    public boolean marked = false;
+    private int xPos;
+    private int yPos;
+    private boolean marked = false;
 
     public Crate(int xPos, int yPos,  boolean marked){
         this.xPos = xPos;
@@ -24,7 +24,7 @@ public class Crate {
         this.marked = marked;
     }
 
-    public boolean getMarked(){
+    public boolean isMarked(){
         return this.marked;
     }
 

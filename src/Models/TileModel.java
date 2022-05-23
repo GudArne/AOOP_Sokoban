@@ -6,9 +6,9 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class TileModel { // MapModel
-    GamePanel gamePanel;
-    public ArrayList<ArrayList<Integer>> numTiles;
-    public ArrayList<Tile> tiles;
+    private GamePanel gamePanel;
+    private ArrayList<ArrayList<Integer>> numTiles;
+    private ArrayList<Tile> tiles;
 
     // Constructs a tile model
     public TileModel(GamePanel gamePanel) {
@@ -30,6 +30,14 @@ public class TileModel { // MapModel
     // returns the game panel
     public GamePanel getGamePanel(){
         return this.gamePanel;
+    }
+    // returns an arraylist of the tiles
+    public ArrayList<Tile> getTiles(){
+        return this.tiles;
+    }
+    // returns an arraylist of the number of the tiles
+    public ArrayList<ArrayList<Integer>> getNumTiles(){
+        return this.numTiles;
     }
 
     // Reads the map and convert it to a 2d array
@@ -62,7 +70,7 @@ public class TileModel { // MapModel
     public boolean checkMarked(int x, int y){
         x = x/ gamePanel.tileSize;
         y = y/ gamePanel.tileSize;
-        if(tiles.get(numTiles.get(y).get(x)).marked)
+        if(tiles.get(numTiles.get(y).get(x)).getMarked())
             return true;
         else return false;
     }

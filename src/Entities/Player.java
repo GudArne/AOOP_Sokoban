@@ -1,8 +1,8 @@
 package Entities;
 
 public class Player {
-    public int playerX,playerY;
-    
+    private int playerX,playerY;
+
     public Player(int playerX, int playerY){
         this.playerX = playerX;
         this.playerY = playerY;
