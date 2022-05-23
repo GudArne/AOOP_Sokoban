@@ -16,11 +16,6 @@ public class DataModel {
       this.direction = direction;
       listeners = new ArrayList<ChangeListener>();
    }
-   // public DataModel(ArrayList<Integer> directions)
-   // {
-   //    this.directions = directions;
-   //    listeners = new ArrayList<ChangeListener>();
-   // }
 
    // Returns the data (direction)
    public String getData(){

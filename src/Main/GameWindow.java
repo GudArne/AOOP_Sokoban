@@ -25,8 +25,8 @@ public class GameWindow {
     public static void main(String[] args) {
         GamePanel gamePanel = new GamePanel(); 
 
-        gamePanel.setController(new MouseHandler(gamePanel.getDataModel()));
-        //gamePanel.setController(new KeyHandler(gamePanel.getDataModel()));
+        //gamePanel.setController(new MouseHandler(gamePanel.getDataModel()));
+        gamePanel.setController(new KeyHandler(gamePanel.getDataModel()));
         
         GameWindow gameWindow = new GameWindow(new JFrame(), gamePanel);
     }

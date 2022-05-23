@@ -8,8 +8,7 @@ public class Tile {
     public boolean marked;
     public String name;
 
-    public Tile(String name, Boolean collision, Boolean marked)
-    {
+    public Tile(String name, Boolean collision, Boolean marked){
         this.name = name;
         this.collision = collision;
         this.marked = marked;
