@@ -103,6 +103,7 @@ public class GamePanel extends JPanel implements ChangeListener{
     @Override
     public void stateChanged(ChangeEvent e) {
         playerModel.update();
+        
         // If the auto complete button is pressed, the super method needs to be called. 
         // Otherwise, the game will not be updated visually for the user.
         if(handler.getMacro())

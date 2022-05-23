@@ -30,9 +30,11 @@ public abstract class Handler implements ActionListener, KeyListener {
         dataModel.update("esc");
     }
 
+    // Gets the boolean macro
     public boolean getMacro(){
         return macro;
     }
+    // Sets the boolean macro
     public void setMacro(boolean macro){
         this.macro = macro;
     }

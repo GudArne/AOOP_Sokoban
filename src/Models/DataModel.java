@@ -7,7 +7,7 @@ import javax.swing.event.ChangeListener;
 public class DataModel {
 
    private String direction;
-   private ArrayList<Integer> directions;
+   private ArrayList<String> directions;;
    private ArrayList<ChangeListener> listeners;
 
    // Constructs a DataModel object

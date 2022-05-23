@@ -27,7 +27,6 @@ public class KeyHandler extends Handler {
 
         if(code == KeyEvent.VK_0) { // loop through predefined path and update data model recursively
             setMacro(true);
-            System.out.println("Macro true");
             // Create a new KeyEvent to simulate the key press
             KeyEvent keyEvent = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), e.getModifiersEx(), e.getKeyCode(), e.getKeyChar());
             
@@ -44,7 +43,6 @@ public class KeyHandler extends Handler {
                 keyPressed(keyEvent);
             }
             setMacro(false);
-            System.out.println("Macro false");
         }
 
         if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP)

@@ -19,8 +19,8 @@ public class CrateView{
         this.gamePanel = gamePanel;
     }
 
-    // Returns the image of the crate
-    public BufferedImage getImage(boolean marked){
+    // Returns the image of a marked or unmarked crate
+    private BufferedImage getImage(boolean marked){
         BufferedImage image;
         try {
             if(marked)
