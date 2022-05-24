@@ -63,13 +63,13 @@ public class CrateModel {
         if(!crate.isMarked() && tileModel.checkMarked(crate.getxPos(), crate.getyPos())) {
             crate.setMarked(true);
             crateMarked++;
-            statsView.setMarkedCrates(crateMarked);
+            statsView.setMarkedCrates(crateMarked, 7);
         }
 
         else if(crate.isMarked() && !tileModel.checkMarked(crate.getxPos(), crate.getyPos())) {
             crate.setMarked(false);
             crateMarked--;
-            statsView.setMarkedCrates(crateMarked);
+            statsView.setMarkedCrates(crateMarked, 7);
         }
     }
 

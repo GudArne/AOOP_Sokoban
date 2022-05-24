@@ -28,6 +28,6 @@ public class GameWindow {
         //gamePanel.setController(new MouseHandler(gamePanel.getDataModel()));
         gamePanel.setController(new KeyHandler(gamePanel.getDataModel()));
         
-        GameWindow gameWindow = new GameWindow(new JFrame(), gamePanel);
+        new GameWindow(new JFrame(), gamePanel);
     }
 }

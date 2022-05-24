@@ -3,8 +3,6 @@ package Models;
 import Entities.Crate;
 import Entities.Player;
 import Main.GamePanel;
-
-import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 import Views.StatsView;
@@ -16,7 +14,6 @@ public class PlayerModel {
     private DataModel dataModel;
     private TileModel tileModel;
     private CrateModel crateModel;
-    //private BufferedImage playerImage;
     private StatsView statsView;
     private Player player;
 
@@ -98,21 +95,23 @@ public class PlayerModel {
     }
     // Checks if there will be a collision with the player. 
     private boolean checkCollision(String direction){
+        int posX = player.getPlayerX();
+        int posY = player.getPlayerY();
         switch (direction){
             case "up" ->{
-                if(!tileModel.getTiles().get(tileModel.getTile(player.getPlayerX(), player.getPlayerY() - gamePanel.tileSize)).getCollision())
+                if(!tileModel.getTiles().get(tileModel.getTile(posX, posY - gamePanel.tileSize)).getCollision())
                     return true;
             }
             case "down" ->{
-                if(!tileModel.getTiles().get(tileModel.getTile(player.getPlayerX(), player.getPlayerY() + gamePanel.tileSize)).getCollision())
+                if(!tileModel.getTiles().get(tileModel.getTile(posX, posY + gamePanel.tileSize)).getCollision())
                     return true;
             }
             case "left" ->{
-                if(!tileModel.getTiles().get(tileModel.getTile(player.getPlayerX() - gamePanel.tileSize, player.getPlayerY())).getCollision())
+                if(!tileModel.getTiles().get(tileModel.getTile(posX - gamePanel.tileSize, posY)).getCollision())
                     return true;
             }
             case "right" ->{
-                if(!tileModel.getTiles().get(tileModel.getTile(player.getPlayerX() + gamePanel.tileSize, player.getPlayerY())).getCollision())
+                if(!tileModel.getTiles().get(tileModel.getTile(posX + gamePanel.tileSize, posY)).getCollision())
                     return true;
             }
         }
@@ -120,7 +119,7 @@ public class PlayerModel {
     }
 
     // Returns the next position of the player
-    public int checkNext(String direction){
+    private int checkNext(String direction){
         int retInt = 0;
         switch (direction){
             case "up" -> retInt = player.getPlayerY() - gamePanel.tileSize;
@@ -139,9 +138,9 @@ public class PlayerModel {
         else
             setAttempts(getAttempts() + 1);
 
-        statsView.setAttemptsLabel("Attempts:", getAttempts());
+        statsView.setAttemptsLabel(getAttempts());
         setStepCount(0);
-        statsView.setMarkedCrates(1);
+        statsView.setMarkedCrates(1, 7);
         statsView.setStepCounterLabel(getStepCount());
         player.setPlayerX(gamePanel.tileSize);
         player.setPlayerY(2 * gamePanel.tileSize);

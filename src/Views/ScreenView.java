@@ -10,9 +10,9 @@ import java.io.File;
 
 public class ScreenView {
 
-    CrateModel crateModel;
-    GamePanel gamePanel;
-    BufferedImage image;
+    private CrateModel crateModel;
+    private GamePanel gamePanel;
+    private BufferedImage image;
 
     // Constructs a ScreenView object
     public ScreenView(GamePanel gamePanel, CrateModel crateModel) {
@@ -37,6 +37,4 @@ public class ScreenView {
             graphics2D.drawImage(image,0,0,384,432,null);
         }
     }
-
-
 }

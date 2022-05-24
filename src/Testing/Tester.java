@@ -2,29 +2,32 @@ package Testing;
 
 import Entities.Crate;
 import Main.GamePanel;
-import Main.GameWindow;
 import Models.CrateModel;
 import Models.DataModel;
 import Models.PlayerModel;
+import Controller.Handler;
+import Controller.KeyHandler;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import javax.swing.JFrame;
 
 public class Tester {
 
-    GamePanel gamePanel;
-    DataModel dataModel = new DataModel("");
-    PlayerModel playerModel;
-    CrateModel crateModel;
+    private GamePanel gamePanel;
+    private DataModel dataModel = new DataModel("");
+    private PlayerModel playerModel;
+    private CrateModel crateModel;
+    private Handler keyHandler;
 
     public Tester() {
         this.gamePanel = new GamePanel();
         this.dataModel = gamePanel.getDataModel();
         this.playerModel = gamePanel.getPlayerModel();
         this.crateModel = gamePanel.getCrateModel();
+        this.keyHandler = new KeyHandler(dataModel);
+        gamePanel.setController(keyHandler);
         
-        GameWindow gameWindow = new GameWindow(new JFrame(), gamePanel);
+        //new GameWindow(new JFrame(), gamePanel);
     }
     
     // try to walk through a wall

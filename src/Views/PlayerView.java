@@ -11,9 +11,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class PlayerView {
-    GamePanel gamePanel;
-    DataModel dataModel;
-    PlayerModel playerModel;
+    private GamePanel gamePanel;
+    private DataModel dataModel;
+    private PlayerModel playerModel;
 
     // Constructs a PlayerView object
     public PlayerView(GamePanel gamePanel, DataModel dataModel,TileModel tileModel, PlayerModel playerModel){

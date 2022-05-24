@@ -2,7 +2,6 @@ package Views;
 
 import Main.GamePanel;
 import Models.CrateModel;
-import Models.DataModel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

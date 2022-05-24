@@ -4,15 +4,13 @@ import javax.swing.*;
 
 public class StatsView extends JFrame {
 
-    String text = "";
-    int value = 0;
-    JLabel attemptsLabel= new JLabel();
-    JLabel stepCounterLabel= new JLabel();
-    JLabel markedCratesLabel = new JLabel();
-    JFrame window =  new JFrame();
+    private JLabel attemptsLabel= new JLabel();
+    private JLabel stepCounterLabel= new JLabel();
+    private JLabel markedCratesLabel = new JLabel();
+    private JFrame window =  new JFrame();
 
     // Constructs a StatsView object
-    public StatsView(String text, int value) {
+    public StatsView() {
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
 
@@ -22,10 +20,10 @@ public class StatsView extends JFrame {
         JLabel info2 = new JLabel("Press 'Esc' to restart");
         panel.add(info2);
 
-        attemptsLabel.setText(text + " " + value + "      ");
+        attemptsLabel.setText("Attempts: " + 0 + "      ");
         panel.add(attemptsLabel);
 
-        stepCounterLabel.setText("Steps: " + value+ "      ");
+        stepCounterLabel.setText("Steps: " + 0+ "      ");
         panel.add(stepCounterLabel);
 
         markedCratesLabel.setText("Marked Crates: (" + 1 + " / 7)");
@@ -43,22 +41,18 @@ public class StatsView extends JFrame {
     }
 
     // Updates the attempts counter
-    public void setAttemptsLabel(String text, int value){
-        this.text = text;
-        this.value = value;
-        attemptsLabel.setText(text + " " + value+ "    ");
+    public void setAttemptsLabel(int value){
+        attemptsLabel.setText("Attempts: " + value+ "    ");
     }
 
     // Updates the step counter
     public void setStepCounterLabel(int value){
-        this.value = value;
         stepCounterLabel.setText("Steps: " + value+ "    ");
     }
 
     // Updates the marked crates counter
-    public void setMarkedCrates(int value){
-        this.value = value;
-        markedCratesLabel.setText("Marked Crates: (" + value + " / 7)");
+    public void setMarkedCrates(int currentVal, int maxVal){
+        markedCratesLabel.setText("Marked Crates: (" + currentVal + " / " + maxVal + ")");
     }
 
 }

@@ -17,8 +17,8 @@ import java.awt.*;
 public class GamePanel extends JPanel implements ChangeListener{
 
     public final int tileSize = 48;
-    public final int screenWidth = tileSize * 8;
-    public final int screenHeight = tileSize * 9;
+    private final int screenWidth = tileSize * 8;
+    private final int screenHeight = tileSize * 9;
     private int stepCount = 0;
     private String data = "";
 
@@ -40,9 +40,9 @@ public class GamePanel extends JPanel implements ChangeListener{
 
 
     public GamePanel() {
-        this.dataModel =  new DataModel(data);
+        this.dataModel = new DataModel(data);
         this.dataModel.attach(this);
-        this.statsView = new StatsView("attempts: ",stepCount);
+        this.statsView = new StatsView();
         this.tileView = new TileView(this);
         this.tileModel = new TileModel(this);
         this.crateModel = new CrateModel(this,tileModel, statsView);
@@ -70,8 +70,8 @@ public class GamePanel extends JPanel implements ChangeListener{
             this.keyHandler = new KeyHandler(dataModel);
             this.addKeyListener(handler);
         }
-
     }
+
     // get gamePanel
     public GamePanel getGamePanel(){
         return this;
@@ -103,7 +103,7 @@ public class GamePanel extends JPanel implements ChangeListener{
     @Override
     public void stateChanged(ChangeEvent e) {
         playerModel.update();
-        
+
         // If the auto complete button is pressed, the super method needs to be called. 
         // Otherwise, the game will not be updated visually for the user.
         if(handler.getMacro())
