@@ -9,11 +9,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Objects;
 
-public class TileView extends TileModel {
+public class TileView extends TileModel{
 
+    private GamePanel gamePanel;
     // Constructs a TileView object
     public TileView(GamePanel gamePanel) {
         super(gamePanel);
+        this.gamePanel = gamePanel;
     }
 
     // Returns the image of the tile
@@ -63,4 +65,15 @@ public class TileView extends TileModel {
             }
         }
     }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        draw((Graphics2D) g);
+    }
+
+    // Get the graphics object of the game panel and call the draw method.
+    public void tileRepaint(){
+        paintComponent(gamePanel.getGraphics());
+    }
+
 }

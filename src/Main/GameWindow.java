@@ -8,9 +8,11 @@ import Views.TileView;
 
 public class GameWindow {
     
-    TileView tileView ;
+    TileView tileView;
+    JFrame window;
 
     public GameWindow(JFrame window, GamePanel gamePanel){
+        this.window = window;
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Sokoban");
@@ -21,12 +23,16 @@ public class GameWindow {
         window.setVisible(true);
         window.pack();
     }
+    public JFrame getFrame(){
+        return window;
+    }
 
     public static void main(String[] args) {
         GamePanel gamePanel = new GamePanel(); 
 
-        //gamePanel.setController(new MouseHandler(gamePanel.getDataModel()));
-        gamePanel.setController(new KeyHandler(gamePanel.getDataModel()));
+        // Toggle which controller to use. 
+        gamePanel.setController(new MouseHandler(gamePanel.getPlayerModel()));
+        gamePanel.setController(new KeyHandler(gamePanel.getPlayerModel()));
         
         new GameWindow(new JFrame(), gamePanel);
     }

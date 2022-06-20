@@ -5,7 +5,9 @@ import Main.GamePanel;
 import java.io.*;
 import java.util.ArrayList;
 
-public class TileModel { // MapModel
+import javax.swing.JPanel;
+
+public class TileModel extends JPanel{ // MapModel
     private GamePanel gamePanel;
     private ArrayList<ArrayList<Integer>> numTiles;
     private ArrayList<Tile> tiles;

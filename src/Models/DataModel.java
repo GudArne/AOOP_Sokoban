@@ -1,36 +1,21 @@
 package Models;
 
-import java.util.ArrayList;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
-public class DataModel {
+public abstract class DataModel {
+    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
-   private String direction;
-   private ArrayList<ChangeListener> listeners;
+    // Attach a listener to a class. (The listener will be notified when the property changes)
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        this.propertyChangeSupport.addPropertyChangeListener(listener);
+    }
 
-   // Constructs a DataModel object
-   public DataModel(String direction){
-      this.direction = direction;
-      listeners = new ArrayList<ChangeListener>();
-   }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        this.propertyChangeSupport.removePropertyChangeListener(listener);
+    }
 
-   // Returns the data (direction)
-   public String getData(){
-      return direction;
-   }
-
-   // Attach a listener to the Model
-   public void attach(ChangeListener c){
-      listeners.add(c);
-   }
-
-   // Notify all listeners of a change
-   public void update(String value){
-      direction = value;
-      for (ChangeListener l : listeners){
-         l.stateChanged(new ChangeEvent(this));
-      }
-   }
-
+    public void firePropertyChange(String propertyName) {
+        this.propertyChangeSupport.firePropertyChange(propertyName, null, null);
+    }
 }

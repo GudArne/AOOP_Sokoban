@@ -3,95 +3,59 @@ package Models;
 import Entities.Crate;
 import Entities.Player;
 import Main.GamePanel;
-import java.util.Objects;
 
-import Views.StatsView;
-public class PlayerModel {
-    private int stepCount = 0;
-    private int attempts = 0;
+public class PlayerModel extends DataModel{
 
     private GamePanel gamePanel;
-    private DataModel dataModel;
     private TileModel tileModel;
     private CrateModel crateModel;
-    private StatsView statsView;
     private Player player;
 
     // Constructs a player model object
-    public PlayerModel(GamePanel gamePanel, DataModel dataModel, TileModel tileModel, CrateModel crateModel, StatsView statsView) {
+    public PlayerModel(GamePanel gamePanel, TileModel tileModel, CrateModel crateModel) {
         this.gamePanel = gamePanel;
-        this.dataModel = dataModel;
         this.tileModel = tileModel;
         this.crateModel = crateModel;
-        this.statsView = statsView;
 
         player = new Player(gamePanel.tileSize, 2 * gamePanel.tileSize);
     }
 
     // Updates the player position and validates if its a correct move.
-    // Also updates the step count and attempts.
     // Also updates the crates and validates if its a correct move.
-    public void update(){
-        String direction = dataModel.getData();
+    public void update(String direction) {
         if(!crateModel.checkIfWon()) {
-            if (Objects.equals(direction, "up") && checkCollision(direction)) {
-                Crate crate = crateModel.getCrate(getX(), checkNext(direction));
-                if (crate == null) {
-                    updatePlayer(direction); //move player
-                    setStepCount(getStepCount() + 1);
-                    statsView.setStepCounterLabel(getStepCount());
-                } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
-                    crateModel.moveCrate(crate, direction);
-                    crateModel.swapMarked(crate);
-                    updatePlayer(direction);
-                    setStepCount(getStepCount() + 1);
-                    statsView.setStepCounterLabel(getStepCount());
+            if (checkCollision(direction)) {
+                Crate crate = null;
+                if(direction == "up" || direction == "down"){
+                    crate = crateModel.getCrate(getX(), checkNext(direction));
                 }
-            } else if (Objects.equals(direction, "down") && checkCollision(direction)) {
-                Crate crate = crateModel.getCrate(getX(), checkNext(direction));
-                if (crate == null) {
-                    updatePlayer(direction); //move player
-                    setStepCount(getStepCount() + 1);
-                    statsView.setStepCounterLabel(getStepCount());
-                } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
-                    crateModel.moveCrate(crate, direction);
-                    crateModel.swapMarked(crate);
-                    updatePlayer(direction);
-                    setStepCount(getStepCount() + 1);
-                    statsView.setStepCounterLabel(getStepCount());
+                else{
+                    crate = crateModel.getCrate(checkNext(direction), getY());
                 }
-            } else if (Objects.equals(direction, "left") && checkCollision(direction)) {
-                Crate crate = crateModel.getCrate(checkNext(direction), getY());
+
                 if (crate == null) {
-                    updatePlayer(direction); //move player
-                    setStepCount(getStepCount() + 1);
-                    statsView.setStepCounterLabel(getStepCount());
+                    updatePlayer(direction); 
+                    firePropertyChange("stepCountIncreased");
+                    firePropertyChange("gameUpdated");
                 } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
                     crateModel.moveCrate(crate, direction);
                     crateModel.swapMarked(crate);
-                    updatePlayer(direction);
-                    setStepCount(getStepCount() + 1);
-                    statsView.setStepCounterLabel(getStepCount());
-                }
-            } else if (Objects.equals(direction, "right") && checkCollision(direction)) {
-                Crate crate = crateModel.getCrate(checkNext(direction), getY());
-                if (crate == null) {
-                    updatePlayer(direction); //move player
-                    setStepCount(getStepCount() + 1);
-                    statsView.setStepCounterLabel(getStepCount());
-                } else if (crateModel.checkCrateCollision(direction, crate.getxPos(), crate.getyPos())) {
-                    crateModel.moveCrate(crate, direction);
-                    crateModel.swapMarked(crate);
-                    updatePlayer(direction);
-                    setStepCount(getStepCount() + 1);
-                    statsView.setStepCounterLabel(getStepCount());
+                    updatePlayer(direction); 
+                    firePropertyChange("stepCountIncreased");
+                    firePropertyChange("gameUpdated");
                 }
             }
+            
         }
-        if (Objects.equals(direction, "esc")) { // Restarts the game if the user presses esc
+        if (direction == "esc") { // Restarts the game if the user presses esc
             setRestart();
             crateModel.setRestart();
+            firePropertyChange("gameUpdated");
         }
+        else{
+            firePropertyChange("gameWon");
+        }
+
     }
     // Checks if there will be a collision with the player. 
     private boolean checkCollision(String direction){
@@ -133,18 +97,14 @@ public class PlayerModel {
     // Resets game statistics and positions of crates and player
     private void setRestart(){
         if(crateModel.checkIfWon()){
-            setAttempts(0);
+            firePropertyChange("resetGame");
         }
-        else
-            setAttempts(getAttempts() + 1);
-
-        statsView.setAttemptsLabel(getAttempts());
-        setStepCount(0);
-        statsView.setMarkedCrates(1, 7);
-        statsView.setStepCounterLabel(getStepCount());
+        else{
+            firePropertyChange("increaseAttempts");
+        }
+ 
         player.setPlayerX(gamePanel.tileSize);
         player.setPlayerY(2 * gamePanel.tileSize);
-
     }
 
     // Updates the player position
@@ -165,25 +125,5 @@ public class PlayerModel {
     // get player Y position
     public int getY(){
         return player.getPlayerY();
-    }
-
-    // get player step count
-    public int getStepCount(){
-        return stepCount;
-    }
-
-    // set player step count
-    public void setStepCount(int stepCount){
-        this.stepCount = stepCount;
-    }
-
-    // get player attempts
-    public int getAttempts(){
-        return attempts;
-    }
-
-    // set player attempts
-    public void setAttempts(int attempts){
-        this.attempts = attempts;
     }
 }

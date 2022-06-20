@@ -1,33 +1,32 @@
 package Controller;
 
 import java.awt.event.*;
-
-import Models.DataModel;
+import Models.PlayerModel;
 
 public abstract class Handler implements ActionListener, KeyListener {
 
-    private DataModel dataModel;
     private boolean macro = false;
+    private PlayerModel playerModel;
 
-    public Handler(DataModel dataModel) {
-        this.dataModel = dataModel;
+    public Handler(PlayerModel playerModel) {
+        this.playerModel = playerModel;
     }
 
     // Updates the data model with a event change
     public void moveUp(){
-        dataModel.update("up");
+        playerModel.update("up");
     }
     public void moveDown(){
-        dataModel.update("down");
+        playerModel.update("down");
     }
     public void moveLeft(){
-        dataModel.update("left");
+        playerModel.update("left");
     }
     public void moveRight(){
-        dataModel.update("right");
+        playerModel.update("right");
     }
     public void restart(){
-        dataModel.update("esc");
+        playerModel.update("esc");
     }
 
     // Gets the boolean macro

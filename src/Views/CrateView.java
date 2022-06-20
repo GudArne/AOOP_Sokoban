@@ -4,11 +4,12 @@ import Main.GamePanel;
 import Models.CrateModel;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class CrateView{
+public class CrateView extends JPanel {
     private CrateModel crateModel;
     private GamePanel gamePanel;
 
@@ -39,4 +40,15 @@ public class CrateView{
             graphics2D.drawImage(getImage(crateModel.getCrates().get(i).isMarked()),crateModel.getCrates().get(i).getxPos(),crateModel.getCrates().get(i).getyPos(),gamePanel.tileSize, gamePanel.tileSize,null);
         }
     }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        draw((Graphics2D) g);
+    }
+
+    // Get the graphics object of the game panel and call the draw method.
+    public void crateRepaint(){
+        paintComponent(gamePanel.getGraphics());
+    }
+
 }

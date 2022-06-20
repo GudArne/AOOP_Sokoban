@@ -4,11 +4,12 @@ import Main.GamePanel;
 import Models.CrateModel;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class ScreenView {
+public class ScreenView extends JPanel{
 
     private CrateModel crateModel;
     private GamePanel gamePanel;
@@ -37,4 +38,15 @@ public class ScreenView {
             graphics2D.drawImage(image,0,0,384,432,null);
         }
     }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        draw((Graphics2D) g);
+    }
+
+    // Get the graphics object of the game panel and call the draw method.
+    public void screenRepaint(){
+        paintComponent(gamePanel.getGraphics());
+    }
+
 }

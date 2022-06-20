@@ -1,35 +1,37 @@
 package Main;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 
+import Controller.GameController;
 import Controller.Handler;
 import Controller.KeyHandler;
 import Controller.MouseHandler;
+import Controller.StatsController;
 import Models.CrateModel;
 import Models.DataModel;
 import Models.PlayerModel;
+import Models.StatsModel;
 import Models.TileModel;
 import Views.*;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JPanel implements ChangeListener{
+public class GamePanel extends JPanel{
 
     public final int tileSize = 48;
     private final int screenWidth = tileSize * 8;
     private final int screenHeight = tileSize * 9;
-    private int stepCount = 0;
-    private String data = "";
 
     private Handler handler;
     private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
+    private GameController gameController;
+    private StatsController statsController;
     
     private DataModel dataModel;
     private TileModel tileModel;
     private CrateModel crateModel;
     private PlayerModel playerModel;
+    private StatsModel statsModel;
 
     private TileView tileView;
     private CrateView crateView;
@@ -40,16 +42,21 @@ public class GamePanel extends JPanel implements ChangeListener{
 
 
     public GamePanel() {
-        this.dataModel = new DataModel(data);
-        this.dataModel.attach(this);
         this.statsView = new StatsView();
         this.tileView = new TileView(this);
+        this.statsModel = new StatsModel(statsView);
         this.tileModel = new TileModel(this);
-        this.crateModel = new CrateModel(this,tileModel, statsView);
-        this.playerModel = new PlayerModel(this, dataModel,tileModel, crateModel, statsView);
-        this.playerView = new PlayerView(this,dataModel,tileModel,playerModel);
+        this.crateModel = new CrateModel(this, tileModel, statsView);
+        this.playerModel = new PlayerModel(this, tileModel, crateModel);
+        this.playerView = new PlayerView(this, playerModel);
         this.crateView =  new CrateView(this,crateModel);
         this.screenView = new ScreenView(this, crateModel);
+        this.gameController = new GameController(crateView, playerView, tileView, screenView);
+        this.statsController = new StatsController(statsModel);
+        
+        // Attach observers
+        playerModel.addPropertyChangeListener(gameController);
+        playerModel.addPropertyChangeListener(statsController);
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.WHITE);
@@ -62,12 +69,12 @@ public class GamePanel extends JPanel implements ChangeListener{
         this.handler = handler;
         if(handler.getClass() == MouseHandler.class)
         {
-            this.mouseHandler = new MouseHandler(dataModel);
-            this.buttonView = new ButtonView(handler);
+            mouseHandler = new MouseHandler(playerModel);
+            buttonView = new ButtonView(handler);
         }
         else if(handler.getClass() == KeyHandler.class)
         {
-            this.keyHandler = new KeyHandler(dataModel);
+            keyHandler = new KeyHandler(playerModel);
             this.addKeyListener(handler);
         }
     }
@@ -87,7 +94,8 @@ public class GamePanel extends JPanel implements ChangeListener{
     public CrateModel getCrateModel(){
         return crateModel;
     }
-    // repaint the views
+
+    // Repaint the view on game startup. Will only be called once.
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
@@ -98,18 +106,4 @@ public class GamePanel extends JPanel implements ChangeListener{
         screenView.draw(graphics2D);
         graphics2D.dispose();
     }
-
-    // Invoked when a controller triggers a change event.
-    @Override
-    public void stateChanged(ChangeEvent e) {
-        playerModel.update();
-
-        // If the auto complete button is pressed, the super method needs to be called. 
-        // Otherwise, the game will not be updated visually for the user.
-        if(handler.getMacro())
-            super.paint(getGraphics());
-        else
-            repaint();
-    }
-
 }

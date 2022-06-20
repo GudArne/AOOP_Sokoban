@@ -1,24 +1,21 @@
 package Views;
 
 import Main.GamePanel;
-import Models.DataModel;
 import Models.PlayerModel;
-import Models.TileModel;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class PlayerView {
+public class PlayerView extends JPanel{
     private GamePanel gamePanel;
-    private DataModel dataModel;
     private PlayerModel playerModel;
 
     // Constructs a PlayerView object
-    public PlayerView(GamePanel gamePanel, DataModel dataModel,TileModel tileModel, PlayerModel playerModel){
+    public PlayerView(GamePanel gamePanel, PlayerModel playerModel){
         this.gamePanel = gamePanel;
-        this.dataModel = dataModel;
         this.playerModel = playerModel;
     }
     // Gets the image of the player
@@ -32,9 +29,20 @@ public class PlayerView {
         }
         return null;
     }
-
+    
     // Draw the view
     public void draw(Graphics2D graphics2D){
         graphics2D.drawImage(getImage(),playerModel.getX(),playerModel.getY(), gamePanel.tileSize,gamePanel.tileSize,null);
     }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        draw((Graphics2D) g);
+    }
+
+    // Get the graphics object of the game panel and call the draw method.
+    public void playerRepaint(){
+        paintComponent(gamePanel.getGraphics());
+    }
+
 }

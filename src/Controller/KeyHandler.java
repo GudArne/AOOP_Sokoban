@@ -4,14 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import Models.DataModel;
+import Models.PlayerModel;
 
 public class KeyHandler extends Handler {
-    private DataModel dataModel;
+    private PlayerModel playerModel;
     private ArrayList<Integer> macroKeys = new ArrayList<Integer>();
 
-    public KeyHandler(DataModel dataModel) {
-        super(dataModel);
+    public KeyHandler(PlayerModel playerModel) {
+        super(playerModel);
         setPredefinedPath(macroKeys);
     }
 

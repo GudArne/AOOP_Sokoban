@@ -2,12 +2,12 @@ package Controller;
 
 import java.awt.event.*;
 
-import Models.DataModel;
+import Models.PlayerModel;
 
 public class MouseHandler extends Handler {
 
-    public MouseHandler(DataModel dataModel) {
-        super(dataModel);
+    public MouseHandler(PlayerModel playerModel) {
+        super(playerModel);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
