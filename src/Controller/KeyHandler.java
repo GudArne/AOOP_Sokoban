@@ -53,7 +53,6 @@ public class KeyHandler extends Handler {
 
         if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN)
             moveDown();
-            
 
         if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT)
             moveRight();

@@ -95,7 +95,7 @@ public class GamePanel extends JPanel{
         return crateModel;
     }
 
-    // Repaint the view on game startup. Will only be called once.
+    // Repaint the view on game startup.
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
@@ -103,7 +103,6 @@ public class GamePanel extends JPanel{
         tileView.draw(graphics2D);
         crateView.draw(graphics2D);
         playerView.draw(graphics2D);
-        screenView.draw(graphics2D);
         graphics2D.dispose();
     }
 }
